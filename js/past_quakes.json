@@ -1,0 +1,6 @@
+{
+    "earthquakes": [
+        { "lat": 14.5995, "lng": 120.9842, "magnitude": 6.5 },
+        { "lat": 15.1652, "lng": 121.0853, "magnitude": 5.9 }
+    ]
+}
