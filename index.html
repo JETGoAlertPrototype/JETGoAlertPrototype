@@ -3,30 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JET GO ALERT - Earthquake Warning</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <script src="assets/js/auth.js" defer></script>
-    <script src="assets/js/main.js" defer></script>
-    <script src="assets/js/map.js" defer></script>
+    <title>JET GO ALERT</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script/auth.js"></script>
+    <script defer src="script/earthquake.js"></script>
+    <script defer src="script/maps.js"></script>
+    <script defer src="script/reports.js"></script>
+    <script defer src="script/risk_analysis.js"></script>
+    <script defer src="script/offline.js"></script>
+    <script defer src="script/notifications.js"></script>
+    <script defer src="script/settings.js"></script>
 </head>
-<body onload="checkLogin()">
-    <header>
-        <h1>JET GO ALERT</h1>
-        <button onclick="logoutUser()">Logout</button>
-    </header>
-
-    <section id="alert-container">
-        <h2>Latest Earthquake Alert</h2>
-        <div id="alert-message">Fetching data...</div>
-    </section>
-
-    <section id="risk-analysis">
-        <h2>Risk Analysis</h2>
-        <p id="risk-level">Analyzing...</p>
-    </section>
-
-    <section id="quakeMap"></section>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
+<body>
+    <h1>JET GO ALERT</h1>
+    <button id="darkModeToggle">Toggle Dark Mode</button>
+    <div id="alert-container">Loading earthquake data...</div>
+    <div id="quakeMap" style="height: 400px;"></div>
+    <div id="risk-analysis"></div>
 </body>
 </html>
