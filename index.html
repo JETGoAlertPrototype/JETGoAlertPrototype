@@ -4,30 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JET GO ALERT</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/main.js" defer></script>
 </head>
-<body onload="checkLogin()">
+<body>
     <header>
-        <h1>JET GO ALERT</h1>
+        <h1>JET GO ALERT - Earthquake Early Warning</h1>
         <button id="logoutButton">Logout</button>
     </header>
-
+    
     <section id="alert-container">
-        <h2>Earthquake Alerts</h2>
-        <p>Fetching latest earthquake data...</p>
+        <h2>Real-Time Earthquake Alerts</h2>
+        <p>Loading earthquake data...</p>
     </section>
-
+    
     <section id="quakeMap"></section>
 
-    <section id="risk-analysis">
-        <h2>Risk Analysis</h2>
-        <p>Loading...</p>
+    <section id="risk-analysis"></section>
+
+    <section>
+        <button id="darkModeToggle">Toggle Dark Mode</button>
+        <button id="sendSMSButton">Send Emergency SMS</button>
+        <button id="startQuizButton">Start Quiz</button>
     </section>
 
-    <button id="darkModeToggle">Toggle Dark Mode</button>
-    <button id="sendSMSButton">Send Emergency SMS</button>
-
-    <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
+    <script src="js/maps.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
 </body>
 </html>
