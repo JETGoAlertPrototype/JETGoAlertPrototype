@@ -4,17 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - JET GO ALERT</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/auth.js" defer></script>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Student Login</h2>
-        <form id="loginForm">
-            <label for="studentCode">Enter Student Code:</label>
-            <input type="text" id="studentCode" placeholder="SC123456" required>
-            <button type="submit">Login</button>
-        </form>
-    </div>
+    <h2>Login with Student Code</h2>
+    <form id="loginForm">
+        <input type="text" id="studentCode" placeholder="Enter your student code" required>
+        <button type="submit">Login</button>
+    </form>
 </body>
 </html>
