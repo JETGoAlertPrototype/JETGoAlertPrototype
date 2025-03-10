@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JET GO ALERT</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="js/main.js" defer></script>
+    <title>JET GO ALERT - Earthquake Warning</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/auth.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/map.js" defer></script>
 </head>
-<body>
+<body onload="checkLogin()">
     <header>
-        <h1>JET GO ALERT - Earthquake Early Warning</h1>
-        <button id="logoutButton">Logout</button>
+        <h1>JET GO ALERT</h1>
+        <button onclick="logoutUser()">Logout</button>
     </header>
-    
+
     <section id="alert-container">
-        <h2>Real-Time Earthquake Alerts</h2>
-        <p>Loading earthquake data...</p>
+        <h2>Latest Earthquake Alert</h2>
+        <div id="alert-message">Fetching data...</div>
     </section>
-    
+
+    <section id="risk-analysis">
+        <h2>Risk Analysis</h2>
+        <p id="risk-level">Analyzing...</p>
+    </section>
+
     <section id="quakeMap"></section>
 
-    <section id="risk-analysis"></section>
-
-    <section>
-        <button id="darkModeToggle">Toggle Dark Mode</button>
-        <button id="sendSMSButton">Send Emergency SMS</button>
-        <button id="startQuizButton">Start Quiz</button>
-    </section>
-
-    <script src="js/maps.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
 </body>
 </html>
