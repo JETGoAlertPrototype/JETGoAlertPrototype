@@ -11,10 +11,10 @@ body {
 /* 🔝 Navbar Styles */
 .navbar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background: #333;
-    padding: 5px 5px;
+    padding: 10px 20px;
     color: white;
     position: fixed;
     width: 100%;
@@ -43,6 +43,11 @@ body {
     color: white;
     text-decoration: none;
     font-size: 1.2em;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    color: #ff758c;
 }
 
 /* 📱 Hamburger Menu */
@@ -82,13 +87,13 @@ body {
     }
 }
 
-/* 🎨 Header - Fun Gradient & Shadow */
+/* 🎨 Header - Gradient & Shadow */
 header {
     background: linear-gradient(135deg, #ff7eb3, #ff758c);
     color: white;
     text-align: center;
     padding: 100px;
-    padding-top: 500px
+    padding-top: 500px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-size: 24px;
     font-weight: bold;
@@ -98,9 +103,8 @@ header {
 /* 📌 Sections - Soft Borders & Shadows */
 section {
     background: #ffffff;
-    align: center;
+    text-align: center;
     padding: 100px;
-    padding-top: 100px;
     margin: 15px auto;
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -112,7 +116,7 @@ section:hover {
     transform: scale(1.02);
 }
 
-/* 🎭 Buttons - Fun Colors & Hover Effects */
+/* 🎭 Buttons - Gradient Colors & Hover Effects */
 button, .btn {
     display: inline-block;
     background: linear-gradient(135deg, #ff6f61, #de4463);
@@ -131,7 +135,6 @@ button:hover, .btn:hover {
     transform: scale(1.05);
 }
 
-/* 🕹 Fun Button Animation */
 button:active {
     transform: scale(0.95);
 }
@@ -193,7 +196,7 @@ button:active {
     100% { box-shadow: 0 0 10px rgba(255, 56, 96, 0.8); }
 }
 
-/* 📍 Report Form - Stylish Inputs */
+/* 📍 Report Form */
 .reportForm {
     background: #fffbfb;
     padding: 25px;
@@ -254,6 +257,7 @@ button:active {
     background: linear-gradient(135deg, #ff6f61, #ff9a8b);
 }
 
+/* 🆕 Fixed Report Button */
 #reportButton {
     position: fixed;
     bottom: 10px;
@@ -267,8 +271,6 @@ button:active {
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s;
-    <a href="report.html" class="btn">🚨 Report an Earthquake</a>
-
 }
 
 #reportButton:hover {
