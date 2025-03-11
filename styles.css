@@ -201,28 +201,6 @@ button:active {
 }
 
 #reportButton {
-    display: block; /* Makes it a block element */
-    width: fit-content; /* Keeps button size based on content */
-    margin: 20px auto; /* Centers it horizontally */
-    background: #ff4500;
-    color: white;
-    border: none;
-    padding: 15px 20px;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s;
-    position: fixed; /* Sticks it to the bottom */
-    bottom: 20px; /* Distance from the bottom */
-    left: 50%; /* Centers it */
-    transform: translateX(-50%); /* Perfectly centers */
-}
-
-#reportButton:hover {
-    background: #d14000;
-}
-
-#reportButton {
     position: fixed; /* Sticks it to the screen */
     bottom: 20px; /* Distance from bottom */
     left: 50%; /* Centers it */
@@ -241,3 +219,8 @@ button:active {
 #reportButton:hover {
     background-color: #d14000;
 }
+
+#reportButton:hover {
+    background: #d14000;
+}
+
