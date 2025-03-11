@@ -6,10 +6,14 @@ import { toggleDarkMode } from "./darkmode.js";
 import { sendEmergencySMS } from "./sms.js";
 import { startQuiz } from "./quiz.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     checkLogin();
-    fetchEarthquakeData();
-    setInterval(fetchEarthquakeData, 30000);
+    await fetchEarthquakeData();
+    analyzeLatestEarthquake();
+    setInterval(async () => {
+        await fetchEarthquakeData();
+        analyzeLatestEarthquake();
+    }, 30000);
 });
 
 document.getElementById("logoutButton")?.addEventListener("click", logoutUser);
