@@ -20,7 +20,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;  /* Ensures it's above everything */
+    z-index: 1000;  /* Keeps it above everything */
 }
 
 .nav-logo {
@@ -92,8 +92,8 @@ header {
     background: linear-gradient(135deg, #ff7eb3, #ff758c);
     color: white;
     text-align: center;
-    padding: 60px 20px; /* Reduced padding */
-    padding-top: 120px;  /* Leaves space for fixed navbar */
+    padding: 80px 20px; /* Adjusted padding */
+    padding-top: 140px;  /* Leaves space for fixed navbar */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-size: 24px;
     font-weight: bold;
@@ -109,11 +109,10 @@ section {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     max-width: 650px;
     transition: transform 0.2s ease-in-out;
+    padding-top: 20px; /* Prevents content from being hidden */
+    margin-top: 80px; /* Ensures sections are pushed down */
 }
-/* 📌 Ensure Sections Don't Get Overlapped */
-section {
-    padding-top: 20px;
-    margin-top: 20px;
+
 section:hover {
     transform: scale(1.02);
 }
