@@ -1,51 +1,47 @@
-document.addEventListener("DOMContentLoaded", () => {
+// Firebase configuration
+const db = firebase.firestore();
+
+document.addEventListener("DOMContentLoaded", function () {
     loadReports();
 });
 
+// Submit user report
 function submitReport() {
-    const reportInput = document.getElementById("user-report");
-    const reportText = reportInput.value.trim();
+    const reportText = document.getElementById("user-report").value;
 
-    if (reportText === "") {
+    if (reportText.trim() === "") {
         alert("Please enter a report before submitting.");
         return;
     }
 
-    const report = {
-        text: reportText,
-        timestamp: new Date().toLocaleString()
-    };
-
-    let reports = JSON.parse(localStorage.getItem("earthquakeReports")) || [];
-    reports.push(report);
-    localStorage.setItem("earthquakeReports", JSON.stringify(reports));
-
-    reportInput.value = ""; // Clear input field
-    loadReports(); // Refresh report list
+    db.collection("earthquakeReports").add({
+        report: reportText,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+        document.getElementById("user-report").value = "";
+        loadReports(); // Reload reports
+    }).catch(error => console.error("Error submitting report:", error));
 }
 
+// Load and display reports
 function loadReports() {
     const reportList = document.getElementById("report-list");
-    reportList.innerHTML = ""; // Clear the list
+    reportList.innerHTML = "Loading reports...";
 
-    let reports = JSON.parse(localStorage.getItem("earthquakeReports")) || [];
-    reports.forEach((report, index) => {
-        const reportItem = document.createElement("div");
-        reportItem.classList.add("report-item");
-        reportItem.innerHTML = `
-            <strong>${report.timestamp}</strong>: ${report.text}
-            <button class="delete-btn" onclick="deleteReport(${index})">🗑 Delete</button>
-        `;
-        reportList.appendChild(reportItem);
-    });
-}
+    db.collection("earthquakeReports").orderBy("timestamp", "desc").get()
+        .then(snapshot => {
+            reportList.innerHTML = ""; // Clear previous content
 
-function deleteReport(index) {
-    let reports = JSON.parse(localStorage.getItem("earthquakeReports")) || [];
-    
-    if (confirm("Are you sure you want to delete this report?")) {
-        reports.splice(index, 1); // Remove the selected report
-        localStorage.setItem("earthquakeReports", JSON.stringify(reports));
-        loadReports(); // Refresh the list
-    }
+            snapshot.forEach(doc => {
+                const { report, timestamp } = doc.data();
+                const date = timestamp ? timestamp.toDate().toLocaleString() : "Unknown time";
+
+                const reportElement = document.createElement("div");
+                reportElement.classList.add("report-item");
+                reportElement.innerHTML = `<strong>${date}:</strong> ${report}`;
+                
+                reportList.appendChild(reportElement);
+            });
+        })
+        .catch(error => console.error("Error loading reports:", error));
 }
