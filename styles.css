@@ -176,10 +176,6 @@ button:active {
     background: #666;
 }
 
-body {
-    padding-top: 70px; /* Adjust based on your navbar's height */
-}
-
 /* 📜 User Reports - Colorful Left Borders */
 .report-item {
     background: #f8f8f8;
