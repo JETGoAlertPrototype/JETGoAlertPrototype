@@ -4,43 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JET GO ALERT</title>
-    
+
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Firebase -->
+
+    <!-- Firebase SDK -->
     <script type="module" src="js/firebase.js"></script>
-    <!-- Firebase App (Core SDK) -->
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
-<script>
-  const firebaseConfig = {
-     apiKey: "AIzaSyB_0CodzHFyERYxy2Apy8Zp4QbHsbr4rfk",
-    authDomain: "jet-go-alert.firebaseapp.com",
-    projectId: "jet-go-alert",
-    storageBucket: "jet-go-alert.firebasestorage.app",
-    messagingSenderId: "605131486515",
-    appId: "1:605131486515:web:ae9661d467e1f63725ba46",
-    measurementId: "G-LF30TWJ3YS"
-  };
-  firebase.initializeApp(firebaseConfig);
-    
-// Retrieve an instance of Firebase Messaging so that it can handle background messages
-const messaging = firebase.messaging();
-
-// Handle background messages
-messaging.onBackgroundMessage((payload) => {
-  console.log('[firebase-messaging-sw.js] Received background message ', payload);
-  const notificationTitle = payload.notification.title;
-  const notificationOptions = {
-    body: payload.notification.body,
-    icon: '/firebase-logo.png'
-  };
-
-  self.registration.showNotification(notificationTitle, notificationOptions);
-});
-</script>
-
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
 
     <!-- Google Maps API -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_NEW_API_KEY&callback=initMap"></script>
@@ -48,46 +19,48 @@ messaging.onBackgroundMessage((payload) => {
     <!-- Leaflet JS for OpenStreetMap -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script defer src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-      <!-- Alert Sound -->
+
+    <!-- Alert Sound -->
     <audio id="alertSound">
         <source src="alerts.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Emergency Preparedness Section -->
-    <div class="safety-section">
-        <h2>🚨 Emergency Preparedness</h2>
-        <ul>
-            <li>🔦 Keep a flashlight & extra batteries</li>
-            <li>🥫 Store non-perishable food</li>
-            <li>💧 Have enough drinking water</li>
-            <li>📞 Memorize emergency contacts</li>
-        </ul>
-        <a href="emergency-checklist.pdf" download class="btn-download">📄 Download Checklist</a>
-    </div>
-
-    <!-- Earthquake Alert Button (For Testing) -->
-    <button onclick="showAlert('🌍 Test earthquake: Magnitude 5.2 detected!')">Trigger Alert</button>
-
-
-    <!-- Buttons for Actions -->
-    <a href="alerts.html" class="btn">📢 Get Alerts</a>
-    <a href="report.html" class="btn">✍️ Report an Earthquake</a>
-
-    <!-- Dark Mode Button -->
-    <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    <!-- Inline Styles -->
     <style>
         #map { height: 400px; width: 100%; }
     </style>
 </head>
+
 <body>
+
     <!-- Header -->
     <header>
         <h1>JET GO ALERT</h1>
-        <button id="darkModeToggle" aria-label="Toggle Dark Mode">Toggle Dark Mode</button>
+        <button id="darkModeToggle" aria-label="Toggle Dark Mode">🌙 Dark Mode</button>
     </header>
 
     <!-- Main Content -->
     <main>
+
+        <!-- Emergency Preparedness Section -->
+        <section class="safety-section">
+            <h2>🚨 Emergency Preparedness</h2>
+            <ul>
+                <li>🔦 Keep a flashlight & extra batteries</li>
+                <li>🥫 Store non-perishable food</li>
+                <li>💧 Have enough drinking water</li>
+                <li>📞 Memorize emergency contacts</li>
+            </ul>
+            <a href="emergency-checklist.pdf" download class="btn-download">📄 Download Checklist</a>
+        </section>
+
+        <!-- Action Buttons -->
+        <section class="buttons">
+            <a href="alerts.html" class="btn">📢 Get Alerts</a>
+            <a href="report.html" class="btn">✍️ Report an Earthquake</a>
+            <button onclick="showAlert('🌍 Test earthquake: Magnitude 5.2 detected!')">Trigger Alert</button>
+        </section>
+
         <!-- Earthquake Alerts Section -->
         <section id="alerts">
             <h2>Earthquake Alerts</h2>
@@ -107,30 +80,31 @@ messaging.onBackgroundMessage((payload) => {
             <button id="report-submit" aria-label="Submit report">Submit</button>
             <div id="report-list"></div>
         </section>
-        
+
+        <!-- User Location & Safety Tips -->
         <section id="user-location">
-    <h2>Your Location & Safety Tips</h2>
-    <button id="getLocation">Find My Location</button>
-    <p id="location-output">Click the button to get your location.</p>
-    <div id="safety-tips"></div>
-</section>
+            <h2>Your Location & Safety Tips</h2>
+            <button id="getLocation">Find My Location</button>
+            <p id="location-output">Click the button to get your location.</p>
+            <div id="safety-tips"></div>
+        </section>
 
-        <div class="report-section">
-    <h2>📍 Report an Earthquake</h2>
-    <form id="reportForm">
-        <label>Location:</label>
-        <input type="text" id="location" required placeholder="Enter city or coordinates">
-        
-        <label>Magnitude:</label>
-        <input type="number" id="magnitude" min="1" max="10" step="0.1" required placeholder="Magnitude (e.g., 5.2)">
-        
-        <label>Description:</label>
-        <textarea id="description" required placeholder="Describe the shaking intensity..."></textarea>
-        
-        <button type="submit">📤 Submit Report</button>
-    </form>
-</div>
-
+        <!-- Earthquake Report Form -->
+        <section class="report-section">
+            <h2>📍 Report an Earthquake</h2>
+            <form id="reportForm">
+                <label>Location:</label>
+                <input type="text" id="location" required placeholder="Enter city or coordinates">
+                
+                <label>Magnitude:</label>
+                <input type="number" id="magnitude" min="1" max="10" step="0.1" required placeholder="Magnitude (e.g., 5.2)">
+                
+                <label>Description:</label>
+                <textarea id="description" required placeholder="Describe the shaking intensity..."></textarea>
+                
+                <button type="submit">📤 Submit Report</button>
+            </form>
+        </section>
 
     </main>
 
@@ -144,16 +118,39 @@ messaging.onBackgroundMessage((payload) => {
     <script defer src="js/earthquake.js"></script>
     <script defer src="js/reports.js"></script>
 
+    <!-- Firebase Initialization -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyB_0CodzHFyERYxy2Apy8Zp4QbHsbr4rfk",
+            authDomain: "jet-go-alert.firebaseapp.com",
+            projectId: "jet-go-alert",
+            storageBucket: "jet-go-alert.firebasestorage.app",
+            messagingSenderId: "605131486515",
+            appId: "1:605131486515:web:ae9661d467e1f63725ba46",
+            measurementId: "G-LF30TWJ3YS"
+        };
+        firebase.initializeApp(firebaseConfig);
+        
+        const messaging = firebase.messaging();
+        messaging.onBackgroundMessage((payload) => {
+            console.log('[firebase-messaging-sw.js] Received background message ', payload);
+            const notificationTitle = payload.notification.title;
+            const notificationOptions = {
+                body: payload.notification.body,
+                icon: '/firebase-logo.png'
+            };
+            self.registration.showNotification(notificationTitle, notificationOptions);
+        });
+    </script>
+
+    <!-- Earthquake Data Fetch & User Reports -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Initialize Map
             var map = L.map('map').setView([14.5995, 120.9842], 6);
-
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; OpenStreetMap contributors'
             }).addTo(map);
 
-            // Fetch Earthquake Data
             async function fetchEarthquakeData() {
                 try {
                     const response = await fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson');
@@ -182,23 +179,20 @@ messaging.onBackgroundMessage((payload) => {
                 }
             }
 
-            fetchEarthquakeData(); // Load initially
-            setInterval(fetchEarthquakeData, 120000); // Refresh every 2 minutes
+            fetchEarthquakeData();
+            setInterval(fetchEarthquakeData, 120000);
 
-            // Handle User Report Submission
             document.getElementById("report-submit").addEventListener("click", () => {
                 const reportText = document.getElementById("user-report").value.trim();
                 if (!reportText) {
                     alert("Please enter a report before submitting.");
                     return;
                 }
-
                 const reportList = document.getElementById("report-list");
                 const newReport = document.createElement("p");
                 newReport.textContent = reportText;
                 reportList.appendChild(newReport);
-
-                document.getElementById("user-report").value = ""; // Clear input after submitting
+                document.getElementById("user-report").value = "";
             });
         });
     </script>
