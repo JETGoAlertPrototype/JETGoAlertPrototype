@@ -8,19 +8,19 @@ body {
     transition: background 0.4s ease-in-out, color 0.4s ease-in-out;
 }
 
-/* 🔝 Navbar Styles */
+/* 🔝 Navbar - Fixed at the Top */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: #333;
-    padding: 10px 20px;
+    padding: 15px 20px;
     color: white;
-    position: fixed;  /* Ensures navbar stays at the top */
-    width: 100%;
+    position: fixed;  /* Sticks to the top */
     top: 0;
     left: 0;
-    z-index: 1000;
+    width: 100%;
+    z-index: 1000;  /* Ensures it's above everything */
 }
 
 .nav-logo {
@@ -87,17 +87,16 @@ body {
     }
 }
 
-/* 🎨 Header - Ensure It Doesn't Push Content Down */
+/* 🏠 Header - Adjust Padding to Prevent Overlap */
 header {
     background: linear-gradient(135deg, #ff7eb3, #ff758c);
     color: white;
     text-align: center;
-    padding: 50px;  /* Reduced padding */
-    padding-top: 120px;  /* Ensures space for fixed navbar */
+    padding: 60px 20px; /* Reduced padding */
+    padding-top: 120px;  /* Leaves space for fixed navbar */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-size: 24px;
     font-weight: bold;
-    letter-spacing: 2px;
 }
 
 /* 📌 Sections - Soft Borders & Shadows */
@@ -111,7 +110,10 @@ section {
     max-width: 650px;
     transition: transform 0.2s ease-in-out;
 }
-
+/* 📌 Ensure Sections Don't Get Overlapped */
+section {
+    padding-top: 20px;
+    margin-top: 20px;
 section:hover {
     transform: scale(1.02);
 }
