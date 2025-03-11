@@ -20,3 +20,8 @@ document.getElementById("logoutButton")?.addEventListener("click", () => {
     localStorage.removeItem("studentCode");
     window.location.href = "login.html";
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetchPHIVOLCSEarthquakeData();
+    fetchEarthquakeData();
+});
