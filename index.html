@@ -48,6 +48,26 @@ messaging.onBackgroundMessage((payload) => {
     <!-- Leaflet JS for OpenStreetMap -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script defer src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+      <!-- Alert Sound -->
+    <audio id="alertSound">
+        <source src="alerts.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Emergency Preparedness Section -->
+    <div class="safety-section">
+        <h2>🚨 Emergency Preparedness</h2>
+        <ul>
+            <li>🔦 Keep a flashlight & extra batteries</li>
+            <li>🥫 Store non-perishable food</li>
+            <li>💧 Have enough drinking water</li>
+            <li>📞 Memorize emergency contacts</li>
+        </ul>
+        <a href="emergency-checklist.pdf" download class="btn-download">📄 Download Checklist</a>
+    </div>
+
+    <!-- Earthquake Alert Button (For Testing) -->
+    <button onclick="showAlert('🌍 Test earthquake: Magnitude 5.2 detected!')">Trigger Alert</button>
+
 
     <style>
         #map { height: 400px; width: 100%; }
