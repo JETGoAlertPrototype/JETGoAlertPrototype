@@ -10,14 +10,15 @@ body {
 
 /* 🔝 Navbar - Fully Fixed at the Top */
 .navbar {
-    position: fixed !important;  /* ✅ Forces it to stay fixed */
+    .navbar {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     background: #333;
     color: white;
     padding: 15px 20px;
-    z-index: 10000; /* ✅ Ensures it's on top */
+    z-index: 1000; /* Ensures it stays above other content */
     height: 70px; /* ✅ Prevents layout shifts */
     display: flex;
     align-items: center;
