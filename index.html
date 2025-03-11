@@ -10,6 +10,22 @@
     
     <!-- Firebase -->
     <script type="module" src="js/firebase.js"></script>
+    <!-- Firebase App (Core SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
+<script>
+  const firebaseConfig = {
+     apiKey: "AIzaSyB_0CodzHFyERYxy2Apy8Zp4QbHsbr4rfk",
+    authDomain: "jet-go-alert.firebaseapp.com",
+    projectId: "jet-go-alert",
+    storageBucket: "jet-go-alert.firebasestorage.app",
+    messagingSenderId: "605131486515",
+    appId: "1:605131486515:web:ae9661d467e1f63725ba46",
+    measurementId: "G-LF30TWJ3YS"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+
 
     <!-- Google Maps API -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_NEW_API_KEY&callback=initMap"></script>
