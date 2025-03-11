@@ -267,6 +267,8 @@ button:active {
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s;
+  <a href="report.html" class="btn">✍️ Report an Earthquake</a>
+
 }
 
 #reportButton:hover {
