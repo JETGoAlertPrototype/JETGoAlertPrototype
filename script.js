@@ -22,7 +22,7 @@ document.getElementById("logoutButton")?.addEventListener("click", () => {
 });
 
 /* 🌍 FETCH REAL-TIME PHIVOLCS EARTHQUAKE ALERTS */
-async function fetchEarthquakeData() {
+async function fetchPHIVOLCSEarthquakeData() {
     try {
         const response = await fetch("https://earthquake.phivolcs.dost.gov.ph/feeds/latest_earthquake.xml");
         const data = await response.text();
@@ -45,7 +45,7 @@ async function fetchEarthquakeData() {
 
         playAlertSound();
     } catch (error) {
-        console.error("❌ Error fetching earthquake data:", error);
+        console.error("❌ Error fetching PHIVOLCS earthquake data:", error);
         document.getElementById("alert-container").innerHTML = "⚠️ Failed to load alerts.";
     }
 }
@@ -55,41 +55,9 @@ function playAlertSound() {
     new Audio('assets/audio/alert.mp3').play();
 }
 
-// Fetch earthquake data every 30 seconds
-fetchEarthquakeData();
-setInterval(fetchEarthquakeData, 30000);
-
-/* 🗺️ GOOGLE MAPS INITIALIZATION */
-let map;
-function initMap() {
-    map = new google.maps.Map(document.getElementById("quakeMap"), {
-        center: { lat: 14.5995, lng: 120.9842 }, // Default location: Philippines
-        zoom: 6
-    });
-}
-
-/* 📍 ADD EARTHQUAKE MARKERS TO MAP */
-const quakeMarkers = [];
-
-function addEarthquakeMarker(lat, lon, magnitude) {
-    const color = magnitude > 6 ? "red" : magnitude > 4 ? "orange" : "yellow";
-
-    const marker = new google.maps.Marker({
-        position: { lat, lng: lon },
-        map,
-        title: `Magnitude: ${magnitude}`
-    });
-
-    const infoWindow = new google.maps.InfoWindow({
-        content: `<strong>Magnitude:</strong> ${magnitude}<br><strong>Location:</strong> (${lat}, ${lon})`
-    });
-
-    marker.addListener("click", () => {
-        infoWindow.open(map, marker);
-    });
-
-    quakeMarkers.push(marker);
-}
+// Fetch PHIVOLCS earthquake data every 30 seconds
+fetchPHIVOLCSEarthquakeData();
+setInterval(fetchPHIVOLCSEarthquakeData, 30000);
 
 /* 🌎 FETCH GLOBAL EARTHQUAKE DATA */
 async function fetchGlobalEarthquakeData() {
@@ -107,102 +75,53 @@ async function fetchGlobalEarthquakeData() {
     }
 }
 
-// Fetch earthquake data when page loads
+// Fetch global earthquake data when page loads
 fetchGlobalEarthquakeData();
 
-/* 🌙 DARK MODE TOGGLE */
-function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-    localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
-}
+/* 🔥 NEW FUNCTION: FETCH LATEST EARTHQUAKE ALERTS (USGS) */
+async function fetchEarthquakeData() {
+    const apiUrl = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&orderby=time";
 
-document.getElementById("darkModeToggle")?.addEventListener("click", toggleDarkMode);
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        displayEarthquakes(data.features);
 
-// Load dark mode preference
-if (localStorage.getItem("darkMode") === "true") {
-    document.body.classList.add("dark-mode");
-}
-
-/* 📩 SEND EMERGENCY SMS */
-document.getElementById("sendSMSButton")?.addEventListener("click", () => {
-    alert("📡 Emergency SMS sent to all registered contacts!");
-});
-
-/* 🚨 SHOW ALERT FUNCTION */
-function showAlert(message) {
-    const alertBox = document.createElement("div");
-    alertBox.className = "alert";
-    alertBox.innerText = message;
-    document.body.appendChild(alertBox);
-
-    // Play alert sound
-    document.getElementById("alertSound").play();
-
-    // Remove alert after 5 seconds
-    setTimeout(() => alertBox.remove(), 5000);
-}
-
-/* 📋 EARTHQUAKE REPORT FORM */
-document.getElementById("reportForm")?.addEventListener("submit", function(event) {
-    event.preventDefault(); // Stop page reload
-
-    const location = document.getElementById("location").value;
-    const magnitude = parseFloat(document.getElementById("magnitude").value);
-    const description = document.getElementById("description").value;
-
-    alert(`📍 Earthquake Reported!\n\n📌 Location: ${location}\n🌍 Magnitude: ${magnitude}\n📄 Details: ${description}`);
-
-    // Add earthquake to map
-    addEarthquakeMarker(14.5995, 120.9842, magnitude);
-
-    // Reset form after submission
-    document.getElementById("reportForm").reset();
-});
-
-/* ✅ STEP 1: VALIDATE STUDENT CODES */
-document.getElementById("studentLoginForm")?.addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const studentCode = document.getElementById("studentCode").value;
-    const validCodes = ["123456", "654321", "987654"]; // Example codes
-
-    if (validCodes.includes(studentCode)) {
-        localStorage.setItem("studentCode", studentCode);
-        window.location.href = "dashboard.html"; // Redirect to dashboard
-    } else {
-        alert("🚫 Invalid student code. Please try again.");
+        // Trigger alert if any earthquake has a magnitude ≥ 5.0
+        const significantQuakes = data.features.filter(quake => quake.properties.mag >= 5.0);
+        if (significantQuakes.length > 0) {
+            triggerEmergencyAlert("🚨 Significant earthquake detected! Stay safe! 🚨");
+        }
+    } catch (error) {
+        console.error("Error fetching earthquake data:", error);
+        document.getElementById("alerts").innerHTML = "<p>Failed to load earthquake data.</p>";
     }
-});
+}
 
-/* ✅ STEP 3: FILTER EARTHQUAKE DATA */
-document.getElementById("filterMagnitude")?.addEventListener("change", function() {
-    const selectedMagnitude = parseFloat(this.value);
+// Call fetchEarthquakeData when the page loads
+document.addEventListener("DOMContentLoaded", fetchEarthquakeData);
 
-    quakeMarkers.forEach(marker => {
-        const markerMagnitude = parseFloat(marker.getTitle().replace("Magnitude: ", ""));
-        marker.setVisible(markerMagnitude >= selectedMagnitude);
+// Function to display earthquake data
+function displayEarthquakes(earthquakes) {
+    const container = document.getElementById("alert-container");
+    container.innerHTML = ""; // Clear previous data
+
+    earthquakes.forEach(quake => {
+        const { place, mag, time } = quake.properties;
+        const date = new Date(time).toLocaleString();
+
+        const quakeElement = document.createElement("div");
+        quakeElement.classList.add("quake-item");
+        quakeElement.innerHTML = `<strong>${place}</strong> - Magnitude: ${mag} | ${date}`;
+        
+        container.appendChild(quakeElement);
     });
-});
+}
 
-/* ✅ STEP 4: EMERGENCY CONTACT LIST */
-document.getElementById("addContactForm")?.addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const contactName = document.getElementById("contactName").value;
-    const contactNumber = document.getElementById("contactNumber").value;
-    const contactList = document.getElementById("contactList");
-
-    if (contactName && contactNumber) {
-        const listItem = document.createElement("li");
-        listItem.textContent = `${contactName}: ${contactNumber}`;
-        contactList.appendChild(listItem);
-
-        document.getElementById("addContactForm").reset();
-    } else {
-        alert("⚠️ Please fill in both fields.");
-    }
-});
-
+/* 🚨 EMERGENCY ALERT FUNCTION */
 function triggerEmergencyAlert(message) {
     // Create alert box
     let alertBox = document.createElement("div");
