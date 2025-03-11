@@ -6,7 +6,7 @@ function triggerEmergencyAlert(message) {
     document.body.appendChild(alertBox);
 
     // Play alert sound
-    let alertSound = new Audio("alert-sound.mp3"); // Ensure this file exists
+   let alertSound = new Audio("/assets/Earthquake Drill Sound Effect.mp3"); 
     alertSound.play();
 
     // Flash screen effect
