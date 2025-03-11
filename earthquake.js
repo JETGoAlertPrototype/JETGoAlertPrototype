@@ -1,22 +1,16 @@
-// Fetch Earthquake Data from PHIVOLCS API
 async function fetchEarthquakeData() {
     try {
-        const response = await fetch('https://earthquake.phivolcs.dost.gov.ph/api/recent');
+        const response = await fetch("https://earthquake.phivolcs.dost.gov.ph/api/recent");
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const data = await response.json();
-
-        console.log("Earthquake Data:", data); // Debugging: Check console
-
-        // Add earthquake markers
-        data.earthquakes.forEach(quake => {
-            L.marker([quake.latitude, quake.longitude])
-                .addTo(map)
-                .bindPopup(`<b>${quake.location}</b><br>Magnitude: ${quake.magnitude}<br>Depth: ${quake.depth} km`);
-        });
-
+        console.log("Fetched earthquake data:", data);
+        displayEarthquakeData(data);
     } catch (error) {
         console.error("Error fetching earthquake data:", error);
+        document.getElementById("alerts").innerHTML = "<p>Failed to load earthquake data.</p>";
     }
 }
 
-// Call function after map loads
 fetchEarthquakeData();
