@@ -1,32 +1,22 @@
-// earthquake.js - Fetch Real-Time PHIVOLCS Data
+// Fetch Earthquake Data from PHIVOLCS API
 async function fetchEarthquakeData() {
     try {
-        const response = await fetch('https://earthquake.phivolcs.dost.gov.ph/feeds/latest_earthquake.xml');
-        const data = await response.text();
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(data, "text/xml");
-        const latestQuake = xml.getElementsByTagName("item")[0];
-        const quakeInfo = {
-            title: latestQuake.getElementsByTagName("title")[0].textContent,
-            description: latestQuake.getElementsByTagName("description")[0].textContent,
-            link: latestQuake.getElementsByTagName("link")[0].textContent
-        };
-        document.getElementById("alert-container").innerHTML = `
-            <h3>${quakeInfo.title}</h3>
-            <p>${quakeInfo.description}</p>
-            <a href="${quakeInfo.link}" target="_blank">More Details</a>
-        `;
-        playAlertSound();
+        const response = await fetch('https://earthquake.phivolcs.dost.gov.ph/api/recent');
+        const data = await response.json();
+
+        console.log("Earthquake Data:", data); // Debugging: Check console
+
+        // Add earthquake markers
+        data.earthquakes.forEach(quake => {
+            L.marker([quake.latitude, quake.longitude])
+                .addTo(map)
+                .bindPopup(`<b>${quake.location}</b><br>Magnitude: ${quake.magnitude}<br>Depth: ${quake.depth} km`);
+        });
+
     } catch (error) {
         console.error("Error fetching earthquake data:", error);
-        document.getElementById("alert-container").innerHTML = "Failed to load alerts.";
     }
 }
 
-function playAlertSound() {
-    const audio = new Audio('assets/audio/alert.mp3');
-    audio.play();
-}
-
+// Call function after map loads
 fetchEarthquakeData();
-setInterval(fetchEarthquakeData, 30000);
