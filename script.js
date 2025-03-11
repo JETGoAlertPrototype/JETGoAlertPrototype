@@ -94,3 +94,49 @@ function sendEmergencySMS() {
 }
 
 document.getElementById("sendSMSButton")?.addEventListener("click", sendEmergencySMS);
+
+/* 🔔 SHOW ALERT FUNCTION */
+function showAlert(message) {
+    const alertBox = document.createElement("div");
+    alertBox.className = "alert";
+    alertBox.innerText = message;
+    document.body.appendChild(alertBox);
+
+    // Play alert sound
+    const sound = document.getElementById("alertSound");
+    sound.play();
+
+    // Remove alert after 5 seconds
+    setTimeout(() => alertBox.remove(), 5000);
+}
+
+/* 📍 ADD EARTHQUAKE MARKERS TO MAP */
+const quakeMarkers = [];
+
+function addEarthquakeMarker(lat, lon, magnitude) {
+    const color = magnitude > 6 ? "red" : magnitude > 4 ? "orange" : "yellow";
+
+    const marker = L.circleMarker([lat, lon], {
+        radius: magnitude * 2,
+        fillColor: color,
+        color: "#000",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+    }).addTo(map);
+
+    marker.bindPopup(`Magnitude: ${magnitude}<br>Location: (${lat}, ${lon})`);
+    quakeMarkers.push(marker);
+}
+
+/* 🌙 TOGGLE DARK MODE */
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+}
+
+/* 🛠 TEST FUNCTION (REMOVE AFTER DEVELOPMENT) */
+setTimeout(() => {
+    showAlert("🌍 Test earthquake: Magnitude 5.2 detected!");
+    addEarthquakeMarker(14.5995, 120.9842, 5.2);
+}, 3000);
+
