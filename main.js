@@ -169,6 +169,6 @@ function requestNotificationPermission() {
   });
 }
 
-// Call the function to request permission
+/ Call the function to request permission
 requestNotificationPermission();
 
