@@ -5,6 +5,8 @@ import { analyzeLatestEarthquake } from "./ai_risk.js";
 import { toggleDarkMode } from "./darkmode.js";
 import { sendEmergencySMS } from "./sms.js";
 import { startQuiz } from "./quiz.js";
+import { db } from "./firebase.js";
+console.log("🔥 Firebase is connected!", db);
 
 document.addEventListener("DOMContentLoaded", async () => {
     checkLogin();
