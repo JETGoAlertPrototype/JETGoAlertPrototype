@@ -47,34 +47,35 @@
     <!-- Load Earthquake Data -->
     <script defer src="js/earthquake.js"></script>
 
-    <script>
-        async function fetchEarthquakeData() {
-            try {
-                const response = await fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson');
-                const data = await response.json();
+   <script>
+    async function fetchEarthquakeData() {
+        try {
+            const response = await fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson');
+            const data = await response.json();
 
-                const earthquakes = data.features.filter(eq => eq.properties.place.includes('Philippines'));
+            const earthquakes = data.features.filter(eq => eq.properties.place.includes('Philippines'));
 
-                let alertContainer = document.getElementById("alert-container");
-                alertContainer.innerHTML = "";
+            let alertContainer = document.getElementById("alert-container");
+            alertContainer.innerHTML = "";
 
-                earthquakes.forEach(eq => {
-                    const { mag, place, time } = eq.properties;
-                    const date = new Date(time).toLocaleString();
-                    alertContainer.innerHTML += `<p><strong>${date}</strong>: M${mag} - ${place}</p>`;
+            earthquakes.forEach(eq => {
+                const { mag, place, time } = eq.properties;
+                const date = new Date(time).toLocaleString();
+                alertContainer.innerHTML += `<p><strong>${date}</strong>: M${mag} - ${place}</p>`;
 
-                    L.marker([eq.geometry.coordinates[1], eq.geometry.coordinates[0]])
-                        .addTo(map)
-                        .bindPopup(`<b>${place}</b><br>Magnitude: ${mag}<br>${date}`);
-                });
+                L.marker([eq.geometry.coordinates[1], eq.geometry.coordinates[0]])
+                    .addTo(map)
+                    .bindPopup(`<b>${place}</b><br>Magnitude: ${mag}<br>${date}`);
+            });
 
-            } catch (error) {
-                console.error("Error fetching earthquake data:", error);
-            }
+        } catch (error) {
+            console.error("Error fetching earthquake data:", error);
         }
+    }
 
-        fetchEarthquakeData();
-    </script>
+    fetchEarthquakeData(); // Load initially
+    setInterval(fetchEarthquakeData, 120000); // Refresh every 2 minutes
+</script>
 
     <footer>
         <p>JET GO ALERT &copy; 2025</p>
