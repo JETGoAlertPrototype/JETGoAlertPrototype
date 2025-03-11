@@ -71,3 +71,4 @@ setInterval(fetchEarthquakeData, 30000);
 
 // Fetch on page load
 document.addEventListener("DOMContentLoaded", fetchEarthquakeData);
+
