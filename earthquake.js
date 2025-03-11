@@ -1,4 +1,4 @@
-// 1️⃣ ADD IT AT THE BEGINNING OR END OF THE FILE
+// 🌍 1️⃣ Function: Trigger Emergency Alert
 function triggerEmergencyAlert(message) {
     // Create alert box
     let alertBox = document.createElement("div");
@@ -7,7 +7,7 @@ function triggerEmergencyAlert(message) {
     document.body.appendChild(alertBox);
 
     // Play alert sound
-    let alertSound = new Audio("/assets/alert-sound.mp3"); // Updated path
+    let alertSound = new Audio("/assets/Earthquake Drill Sound Effect.mp3");
     alertSound.play();
 
     // Flash screen effect
@@ -22,71 +22,43 @@ function triggerEmergencyAlert(message) {
     }, 3000);
 }
 
-// 2️⃣ MAKE SURE TO CALL THIS FUNCTION INSIDE fetchEarthquakeData()
+// 🌍 2️⃣ Function: Fetch Earthquake Data (USGS API)
 async function fetchEarthquakeData() {
     try {
-        const response = await fetch("https://earthquake.phivolcs.dost.gov.ph/api/recent");
+        const apiUrl = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&orderby=time";
+        const response = await fetch(apiUrl);
+        
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
         const data = await response.json();
         console.log("Fetched earthquake data:", data);
-        displayEarthquakeData(data);
+        
+        // Process and display the data
+        displayEarthquakes(data.features);
 
-        // 🔥 ADD THIS LINE TO TRIGGER ALERT WHEN EARTHQUAKE IS DETECTED 🔥
-        if (data.length > 0) {  // Assuming data contains earthquake events
-            triggerEmergencyAlert("🚨 Earthquake detected! Stay safe! 🚨");
+        // 🔥 Trigger alert if strong earthquake detected
+        const strongQuake = data.features.find(q => q.properties.mag >= 5.0);
+        if (strongQuake) {
+            triggerEmergencyAlert(`🚨 Earthquake Alert! Magnitude ${strongQuake.properties.mag} detected near ${strongQuake.properties.place}.`);
         }
+
     } catch (error) {
         console.error("Error fetching earthquake data:", error);
-        document.getElementById("alerts").innerHTML = "<p>Failed to load earthquake data.</p>";
+        document.getElementById("alert-container").innerHTML = "<p>Failed to load earthquake data.</p>";
     }
 }
 
-// Fetch earthquake data when the page loads
-fetchEarthquakeData();
-
-function triggerEmergencyAlert(message) {
-    // Create alert box
-    let alertBox = document.createElement("div");
-    alertBox.className = "alert-box";
-    alertBox.innerText = message;
-    document.body.appendChild(alertBox);
-
-    // Play alert sound
-   let alertSound = new Audio("/assets/Earthquake Drill Sound Effect.mp3"); 
-    alertSound.play();
-
-    // Flash screen effect
-    let flash = document.createElement("div");
-    flash.className = "flash-effect";
-    document.body.appendChild(flash);
-    
-    // Remove alert after 3 seconds
-    setTimeout(() => {
-        alertBox.remove();
-        flash.remove();
-    }, 3000);
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    fetchEarthquakeData();
-});
-
-// Function to fetch earthquake data from USGS API
-function fetchEarthquakeData() {
-    const apiUrl = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&orderby=time";
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => displayEarthquakes(data.features))
-        .catch(error => console.error("Error fetching earthquake data:", error));
-}
-
-// Function to display earthquake data
+// 🌍 3️⃣ Function: Display Earthquake Data
 function displayEarthquakes(earthquakes) {
     const container = document.getElementById("alert-container");
     container.innerHTML = ""; // Clear previous data
+
+    if (earthquakes.length === 0) {
+        container.innerHTML = "<p>No recent earthquakes detected.</p>";
+        return;
+    }
 
     earthquakes.forEach(quake => {
         const { place, mag, time } = quake.properties;
@@ -99,3 +71,6 @@ function displayEarthquakes(earthquakes) {
         container.appendChild(quakeElement);
     });
 }
+
+// 🌍 4️⃣ Fetch earthquake data when the page loads
+document.addEventListener("DOMContentLoaded", fetchEarthquakeData);
