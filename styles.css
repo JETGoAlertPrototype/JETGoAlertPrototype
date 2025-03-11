@@ -96,6 +96,17 @@ footer {
     border-left: 5px solid #007BFF;
 }
 
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+.dark-mode button {
+    background-color: white;
+    color: black;
+}
+
+
 .delete-btn:hover {
     background: darkred;
 }
