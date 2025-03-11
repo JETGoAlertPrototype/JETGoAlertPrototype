@@ -7,6 +7,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css"> <!-- Ensure correct linking -->
 
     <!-- Firebase SDK (Fixed Order) -->
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
@@ -83,7 +84,7 @@
         <!-- Earthquake Alerts Section -->
         <section id="alerts">
             <h2>Earthquake Alerts</h2>
-            <div id="alert-container">Loading earthquake data...</div>
+            <div id="alert-container"></div> <!-- Alert Container Added -->
         </section>
 
         <!-- Earthquake Map Section -->
@@ -130,8 +131,7 @@
             <a href="report.html" class="btn">🚨 Report an Earthquake</a>
         </button>
 
-        <div id="alert-container"></div>
-<button onclick="fetchEarthquakeData()" class="check-earthquake-btn">Check Earthquake Data</button>
+        <button onclick="fetchEarthquakeData()" class="check-earthquake-btn">Check Earthquake Data</button>
 
     </main>
 
@@ -144,6 +144,7 @@
     <script defer src="js/main.js"></script>
     <script defer src="js/earthquake.js"></script>
     <script defer src="js/reports.js"></script>
+    <script defer src="script.js"></script> <!-- Ensure correct linking -->
 
     <!-- Firebase Notification Handling -->
     <script>
@@ -189,9 +190,6 @@
             setInterval(fetchEarthquakeData, 120000);
         });
     </script>
-
-    <!-- Dark Mode Toggle -->
-    <script defer src="script.js"></script>
 
 </body>
 </html>
