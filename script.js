@@ -202,3 +202,26 @@ document.getElementById("addContactForm")?.addEventListener("submit", function(e
         alert("⚠️ Please fill in both fields.");
     }
 });
+
+function triggerEmergencyAlert(message) {
+    // Create alert box
+    let alertBox = document.createElement("div");
+    alertBox.className = "alert-box";
+    alertBox.innerText = message;
+    document.body.appendChild(alertBox);
+
+    // Play alert sound
+    let alertSound = new Audio("/assets/alert-sound.mp3"); // Ensure this path is correct
+    alertSound.play();
+
+    // Flash screen effect
+    let flash = document.createElement("div");
+    flash.className = "flash-effect";
+    document.body.appendChild(flash);
+    
+    // Remove alert after 3 seconds
+    setTimeout(() => {
+        alertBox.remove();
+        flash.remove();
+    }, 3000);
+}
