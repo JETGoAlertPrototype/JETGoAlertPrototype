@@ -16,7 +16,6 @@ function submitReport() {
         timestamp: new Date().toLocaleString()
     };
 
-    // Store in local storage
     let reports = JSON.parse(localStorage.getItem("earthquakeReports")) || [];
     reports.push(report);
     localStorage.setItem("earthquakeReports", JSON.stringify(reports));
@@ -33,7 +32,20 @@ function loadReports() {
     reports.forEach((report, index) => {
         const reportItem = document.createElement("div");
         reportItem.classList.add("report-item");
-        reportItem.innerHTML = `<strong>${report.timestamp}</strong>: ${report.text}`;
+        reportItem.innerHTML = `
+            <strong>${report.timestamp}</strong>: ${report.text}
+            <button class="delete-btn" onclick="deleteReport(${index})">🗑 Delete</button>
+        `;
         reportList.appendChild(reportItem);
     });
+}
+
+function deleteReport(index) {
+    let reports = JSON.parse(localStorage.getItem("earthquakeReports")) || [];
+    
+    if (confirm("Are you sure you want to delete this report?")) {
+        reports.splice(index, 1); // Remove the selected report
+        localStorage.setItem("earthquakeReports", JSON.stringify(reports));
+        loadReports(); // Refresh the list
+    }
 }
