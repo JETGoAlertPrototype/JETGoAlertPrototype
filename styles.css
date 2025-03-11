@@ -222,19 +222,6 @@ button:active {
     box-shadow: 0 0 10px rgba(255, 56, 96, 0.5);
 }
 
-/* 🛡 Safety Section - Clean & Spaced */
-.safety-section ul {
-    list-style: none;
-    padding: 0;
-}
-
-.safety-section li {
-    font-size: 18px;
-    margin: 10px 0;
-    font-weight: bold;
-    color: #ff6f61;
-}
-
 /* 🌙 Dark Mode - Neon Glow Vibes */
 .dark-mode {
     background-color: #121212;
@@ -264,22 +251,12 @@ button:active {
     background: linear-gradient(135deg, #ff6f61, #ff9a8b);
 }
 
-/* 🌟 Glow Effect in Dark Mode */
-.dark-mode h1 {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-}
-
-.dark-mode .alert {
-    background: #ff3860;
-    box-shadow: 0 0 15px rgba(255, 56, 96, 1);
-}
-
 #reportButton {
-    position: fixed; /* Sticks it to the screen */
-    bottom: 20px; /* Distance from bottom */
-    left: 50%; /* Centers it */
-    transform: translateX(-50%); /* Ensures exact centering */
-    background-color: #ff4500; /* Alert color */
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff4500;
     color: white;
     padding: 15px 20px;
     font-size: 18px;
@@ -287,14 +264,8 @@ button:active {
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-#reportButton:hover {
-    background-color: #d14000;
 }
 
 #reportButton:hover {
     background: #d14000;
 }
-
