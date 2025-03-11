@@ -63,8 +63,8 @@
     <script defer src="js/reports.js"></script>
 
     <script>
-        // Initialize Map
         document.addEventListener("DOMContentLoaded", () => {
+            // Initialize Map
             var map = L.map('map').setView([14.5995, 120.9842], 6);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -102,22 +102,22 @@
 
             fetchEarthquakeData(); // Load initially
             setInterval(fetchEarthquakeData, 120000); // Refresh every 2 minutes
-        });
 
-        // Handle User Report Submission
-        document.getElementById("report-submit").addEventListener("click", () => {
-            const reportText = document.getElementById("user-report").value.trim();
-            if (!reportText) {
-                alert("Please enter a report before submitting.");
-                return;
-            }
+            // Handle User Report Submission
+            document.getElementById("report-submit").addEventListener("click", () => {
+                const reportText = document.getElementById("user-report").value.trim();
+                if (!reportText) {
+                    alert("Please enter a report before submitting.");
+                    return;
+                }
 
-            const reportList = document.getElementById("report-list");
-            const newReport = document.createElement("p");
-            newReport.textContent = reportText;
-            reportList.appendChild(newReport);
+                const reportList = document.getElementById("report-list");
+                const newReport = document.createElement("p");
+                newReport.textContent = reportText;
+                reportList.appendChild(newReport);
 
-            document.getElementById("user-report").value = ""; // Clear input after submitting
+                document.getElementById("user-report").value = ""; // Clear input after submitting
+            });
         });
     </script>
 
