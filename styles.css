@@ -86,9 +86,9 @@ body {
 header {
     background: linear-gradient(135deg, #ff7eb3, #ff758c);
     color: white;
+    text-align: center;
     padding: 20px;
     padding-top: 60px
-    text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-size: 24px;
     font-weight: bold;
@@ -98,6 +98,7 @@ header {
 /* 📌 Sections - Soft Borders & Shadows */
 section {
     background: #ffffff;
+    text-align: center;
     padding: 20px;
     padding-top: 60px;
     margin: 15px auto;
