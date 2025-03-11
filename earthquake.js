@@ -1,26 +1,3 @@
-function triggerEmergencyAlert(message) {
-    // Create alert box
-    let alertBox = document.createElement("div");
-    alertBox.className = "alert-box";
-    alertBox.innerText = message;
-    document.body.appendChild(alertBox);
-
-    // Play alert sound
-    let alertSound = new Audio("alert-sound.mp3"); // Ensure this file exists
-    alertSound.play();
-
-    // Flash screen effect
-    let flash = document.createElement("div");
-    flash.className = "flash-effect";
-    document.body.appendChild(flash);
-    
-    // Remove alert after 3 seconds
-    setTimeout(() => {
-        alertBox.remove();
-        flash.remove();
-    }, 3000);
-}
-
 async function fetchEarthquakeData() {
     try {
         const response = await fetch("https://earthquake.phivolcs.dost.gov.ph/api/recent");
@@ -29,11 +6,32 @@ async function fetchEarthquakeData() {
         }
         const data = await response.json();
         console.log("Fetched earthquake data:", data);
-        displayEarthquakeData(data);
+
+        // Ensure the data contains earthquake reports
+        if (data && data.length > 0) {
+            const latestQuake = data[0]; // Get the most recent earthquake
+            const magnitude = latestQuake.magnitude;
+            const location = latestQuake.location;
+            const depth = latestQuake.depth;
+            const time = latestQuake.time;
+
+            console.log(`Latest earthquake detected: Magnitude ${magnitude}, Location: ${location}`);
+
+            // Set a threshold for alerting (e.g., Magnitude 4.5 or higher)
+            if (magnitude >= 4.5) {
+                const alertMessage = `🚨 Earthquake Alert! Mag ${magnitude} near ${location} at ${time}.`;
+                triggerEmergencyAlert(alertMessage);
+            }
+        }
+
+        displayEarthquakeData(data); // Update UI with earthquake data
     } catch (error) {
         console.error("Error fetching earthquake data:", error);
         document.getElementById("alerts").innerHTML = "<p>Failed to load earthquake data.</p>";
     }
 }
 
-fetchEarthquakeData();
+// Fetch earthquake data every 60 seconds
+setInterval(fetchEarthquakeData, 60000);
+
+fetchEarthquakeData(); // Run once on page load
