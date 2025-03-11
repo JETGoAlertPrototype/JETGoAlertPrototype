@@ -16,6 +16,11 @@ body {
     background: #333;
     padding: 15px 20px;
     color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .nav-logo {
@@ -27,6 +32,7 @@ body {
     list-style: none;
     display: flex;
     gap: 20px;
+    transition: all 0.3s ease-in-out;
 }
 
 .nav-links li {
@@ -39,6 +45,7 @@ body {
     font-size: 1.2em;
 }
 
+/* 📱 Hamburger Menu */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -48,8 +55,8 @@ body {
 .bar {
     background: white;
     height: 4px;
-    width: 25px;
-    margin: 3px 0;
+    width: 30px;
+    margin: 5px 0;
     border-radius: 5px;
 }
 
@@ -58,6 +65,7 @@ body {
     .menu-toggle {
         display: flex;
     }
+
     .nav-links {
         display: none;
         flex-direction: column;
@@ -68,11 +76,11 @@ body {
         width: 100%;
         padding: 10px 0;
     }
+
     .nav-links.active {
         display: flex;
     }
 }
-
 
 /* 🎨 Header - Fun Gradient & Shadow */
 header {
