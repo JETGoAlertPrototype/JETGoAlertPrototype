@@ -5,22 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JET GO ALERT</title>
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- ✅ Fixed script paths -->
-    <script defer src="js/auth.js"></script>
-    <script defer src="js/earthquake.js"></script>
-    <script defer src="js/maps.js"></script>
-    <script defer src="js/reports.js"></script>
-    <script defer src="js/risk_analysis.js"></script>
-    <script defer src="js/offline.js"></script>
-    <script defer src="js/notifications.js"></script>
-    <script defer src="js/settings.js"></script>
+    <script defer src="js/main.js"></script>
 </head>
 <body>
-    <h1>JET GO ALERT</h1>
-    <button id="darkModeToggle">Toggle Dark Mode</button>
-    <div id="alert-container">Loading earthquake data...</div>
-    <div id="quakeMap" style="height: 400px;"></div>
-    <div id="risk-analysis"></div>
+    <header>
+        <h1>JET GO ALERT</h1>
+        <button id="darkModeToggle">Toggle Dark Mode</button>
+    </header>
+
+    <main>
+        <section id="alerts">
+            <h2>Earthquake Alerts</h2>
+            <div id="alert-container">Loading earthquake data...</div>
+        </section>
+
+        <section id="quake-map">
+            <h2>Earthquake Map</h2>
+            <div id="map" style="height: 400px;"></div>
+        </section>
+
+        <section id="reports">
+            <h2>User Reports</h2>
+            <textarea id="user-report" placeholder="Describe your experience..."></textarea>
+            <button onclick="submitReport()">Submit</button>
+            <div id="report-list"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>JET GO ALERT &copy; 2025</p>
+    </footer>
+
 </body>
 </html>
