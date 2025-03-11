@@ -8,12 +8,14 @@
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Firebase SDK -->
-    <script type="module" src="js/firebase.js"></script>
+    <!-- Firebase SDK (Fixed Order) -->
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
 
-    <!-- Google Maps API -->
+    <!-- Now load your custom Firebase script -->
+    <script type="module" src="js/firebase.js"></script>
+
+    <!-- Google Maps API (Replace YOUR_NEW_API_KEY) -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_NEW_API_KEY&callback=initMap"></script>
 
     <!-- Leaflet JS for OpenStreetMap -->
@@ -28,28 +30,27 @@
     <!-- Inline Styles -->
     <style>
         #map { height: 400px; width: 100%; }
+        .dark-mode { background-color: #121212; color: white; }
     </style>
 </head>
-    
-<script defer src="script.js"></script>
 
 <body>
 
     <!-- 🔝 Top Navigation Bar -->
-<nav class="navbar">
-    <div class="nav-logo">JET GO ALERT</div>
-    <div class="menu-toggle" id="mobile-menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-    </div>
-    <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Reports</a></li>
-        <li><a href="#">Safety Tips</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
-</nav>
+    <nav class="navbar">
+        <div class="nav-logo">JET GO ALERT</div>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Safety Tips</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
 
     <!-- Header -->
     <header>
@@ -123,10 +124,11 @@
                 <button type="submit">📤 Submit Report</button>
             </form>
         </section>
-<!-- Report an Earthquake Floating Button -->
-<button id="reportButton">
-    <a href="report.html" class="btn">🚨 Report an Earthquake</a>
-</button>
+
+        <!-- Report Floating Button -->
+        <button id="reportButton">
+            <a href="report.html" class="btn">🚨 Report an Earthquake</a>
+        </button>
 
     </main>
 
@@ -140,28 +142,18 @@
     <script defer src="js/earthquake.js"></script>
     <script defer src="js/reports.js"></script>
 
-    <!-- Firebase Initialization -->
+    <!-- Firebase Notification Handling -->
     <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyB_0CodzHFyERYxy2Apy8Zp4QbHsbr4rfk",
-            authDomain: "jet-go-alert.firebaseapp.com",
-            projectId: "jet-go-alert",
-            storageBucket: "jet-go-alert.firebasestorage.app",
-            messagingSenderId: "605131486515",
-            appId: "1:605131486515:web:ae9661d467e1f63725ba46",
-            measurementId: "G-LF30TWJ3YS"
-        };
-        firebase.initializeApp(firebaseConfig);
-        
         const messaging = firebase.messaging();
-        messaging.onBackgroundMessage((payload) => {
-            console.log('[firebase-messaging-sw.js] Received background message ', payload);
+
+        messaging.onMessage((payload) => {
+            console.log("Message received:", payload);
             const notificationTitle = payload.notification.title;
             const notificationOptions = {
                 body: payload.notification.body,
-                icon: '/firebase-logo.png'
+                icon: "/firebase-logo.png",
             };
-            self.registration.showNotification(notificationTitle, notificationOptions);
+            new Notification(notificationTitle, notificationOptions);
         });
     </script>
 
@@ -181,44 +173,22 @@
                     const data = await response.json();
                     const earthquakes = data.features.filter(eq => eq.properties.place.includes('Philippines'));
 
-                    let alertContainer = document.getElementById("alert-container");
-                    alertContainer.innerHTML = earthquakes.length ? "" : "No recent earthquakes detected.";
-
-                    earthquakes.forEach(eq => {
-                        const { mag, place, time } = eq.properties;
-                        const date = new Date(time).toLocaleString();
-
-                        alertContainer.innerHTML += `<p><strong>${date}</strong>: M${mag} - ${place}</p>`;
-
-                        L.marker([eq.geometry.coordinates[1], eq.geometry.coordinates[0]])
-                            .addTo(map)
-                            .bindPopup(`<b>${place}</b><br>Magnitude: ${mag}<br>${date}`);
-                    });
+                    document.getElementById("alert-container").innerHTML = earthquakes.length 
+                        ? earthquakes.map(eq => `<p><strong>${new Date(eq.properties.time).toLocaleString()}</strong>: M${eq.properties.mag} - ${eq.properties.place}</p>`).join("")
+                        : "No recent earthquakes detected.";
 
                 } catch (error) {
                     console.error("Error fetching earthquake data:", error);
                     document.getElementById("alert-container").innerHTML = "Error loading data.";
                 }
             }
-
             fetchEarthquakeData();
             setInterval(fetchEarthquakeData, 120000);
-
-            document.getElementById("report-submit").addEventListener("click", () => {
-                const reportText = document.getElementById("user-report").value.trim();
-                if (!reportText) {
-                    alert("Please enter a report before submitting.");
-                    return;
-                }
-                const reportList = document.getElementById("report-list");
-                const newReport = document.createElement("p");
-                newReport.textContent = reportText;
-                reportList.appendChild(newReport);
-                document.getElementById("user-report").value = "";
-            });
         });
-       
     </script>
-<script defer src="script.js"></script>/
+
+    <!-- Dark Mode Toggle -->
+    <script defer src="script.js"></script>
+
 </body>
 </html>
