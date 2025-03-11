@@ -98,7 +98,7 @@ header {
 /* 📌 Sections - Soft Borders & Shadows */
 section {
     background: #ffffff;
-    text-align: center;
+    align: center;
     padding: 20px;
     padding-top: 60px;
     margin: 15px auto;
