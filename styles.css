@@ -16,11 +16,16 @@ body {
     background: #333;
     padding: 15px 20px;
     color: white;
-    position: fixed;  /* Sticks to the top */
+    position: fixed;  /* ✅ Ensures it stays at the top */
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;  /* Keeps it above everything */
+    z-index: 1000;  /* ✅ Keeps it above everything else */
+}
+
+/* 💡 Prevent Content from Being Hidden Under Navbar */
+body {
+    padding-top: 70px;  /* ✅ Pushes everything below navbar */
 }
 
 .nav-logo {
@@ -92,8 +97,7 @@ header {
     background: linear-gradient(135deg, #ff7eb3, #ff758c);
     color: white;
     text-align: center;
-    padding: 80px 20px; /* Adjusted padding */
-    padding-top: 140px;  /* Leaves space for fixed navbar */
+    padding: 80px 20px; /* ✅ Adjusted */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-size: 24px;
     font-weight: bold;
@@ -109,8 +113,6 @@ section {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     max-width: 650px;
     transition: transform 0.2s ease-in-out;
-    padding-top: 20px; /* Prevents content from being hidden */
-    margin-top: 80px; /* Ensures sections are pushed down */
 }
 
 section:hover {
