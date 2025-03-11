@@ -96,3 +96,6 @@ footer {
     border-left: 5px solid #007BFF;
 }
 
+.delete-btn:hover {
+    background: darkred;
+}
