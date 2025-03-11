@@ -74,3 +74,24 @@ function displayEarthquakes(earthquakes) {
 
 // 🌍 4️⃣ Fetch earthquake data when the page loads
 document.addEventListener("DOMContentLoaded", fetchEarthquakeData);
+
+// Fetch data & update UI
+async function fetchEarthquakeData() {
+    const response = await fetch("https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&orderby=time");
+    const data = await response.json();
+    
+    let quakes = data.features.map(q => ({
+        place: q.properties.place,
+        mag: q.properties.mag
+    }));
+
+    displayEarthquakeAlerts(quakes);
+    triggerEmergencyAlert(quakes);
+}
+
+// Fetch every 30 seconds
+setInterval(fetchEarthquakeData, 30000);
+
+// Run once on page load
+document.addEventListener("DOMContentLoaded", fetchEarthquakeData);
+
