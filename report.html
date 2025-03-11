@@ -1,3 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+  <body>
+      <section class="report-section">
+            <h2>📍 Report an Earthquake</h2>
+            <form id="reportForm">
+                <label>Location:</label>
+                <input type="text" id="location" required placeholder="Enter city or coordinates">
+                
+                <label>Magnitude:</label>
+                <input type="number" id="magnitude" min="1" max="10" step="0.1" required placeholder="Magnitude (e.g., 5.2)">
+                
+                <label>Description:</label>
+                <textarea id="description" required placeholder="Describe the shaking intensity..."></textarea>
+                
+                <button type="submit">📤 Submit Report</button>
+            </form>
+        </section>
+  </body>
