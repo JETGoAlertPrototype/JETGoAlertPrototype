@@ -6,12 +6,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // 📌 Mobile Menu Toggle
-const mobileMenu = document.getElementById("mobile-menu");
-const navLinks = document.querySelector(".nav-links");
+document.addEventListener("DOMContentLoaded", () => {
+    const mobileMenu = document.getElementById("mobile-menu");
+    const navLinks = document.querySelector(".nav-links");
 
-mobileMenu.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
+    mobileMenu.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+    });
 });
+
 
 
 /* 🚪 LOGOUT FUNCTION */
