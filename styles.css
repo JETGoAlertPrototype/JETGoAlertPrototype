@@ -194,7 +194,7 @@ button:active {
 }
 
 /* 📍 Report Form - Stylish Inputs */
-.report-section {
+.reportForm {
     background: #fffbfb;
     padding: 25px;
     border-radius: 12px;
@@ -202,7 +202,7 @@ button:active {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.report-section h2 {
+.reportForm h2 {
     color: #ff4500;
     font-size: 22px;
     text-align: center;
