@@ -24,6 +24,21 @@
     measurementId: "G-LF30TWJ3YS"
   };
   firebase.initializeApp(firebaseConfig);
+    
+// Retrieve an instance of Firebase Messaging so that it can handle background messages
+const messaging = firebase.messaging();
+
+// Handle background messages
+messaging.onBackgroundMessage((payload) => {
+  console.log('[firebase-messaging-sw.js] Received background message ', payload);
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
+    body: payload.notification.body,
+    icon: '/firebase-logo.png'
+  };
+
+  self.registration.showNotification(notificationTitle, notificationOptions);
+});
 </script>
 
 
