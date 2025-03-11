@@ -85,3 +85,51 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    const getLocationButton = document.getElementById("getLocation");
+    const locationOutput = document.getElementById("location-output");
+    const safetyTipsDiv = document.getElementById("safety-tips");
+
+    getLocationButton.addEventListener("click", () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+
+                    locationOutput.textContent = `Your Coordinates: ${lat}, ${lon}`;
+
+                    // Add user marker to the map
+                    L.marker([lat, lon])
+                        .addTo(map)
+                        .bindPopup("<b>You are here!</b>")
+                        .openPopup();
+
+                    // Fetch safety tips
+                    showSafetyTips(lat, lon);
+                },
+                () => {
+                    locationOutput.textContent = "Location access denied.";
+                }
+            );
+        } else {
+            locationOutput.textContent = "Geolocation is not supported by your browser.";
+        }
+    });
+
+    function showSafetyTips(lat, lon) {
+        let tips = `
+            <h3>Earthquake Safety Tips:</h3>
+            <ul>
+                <li>🛑 Drop, Cover, and Hold On during shaking.</li>
+                <li>🚪 If indoors, stay inside and take cover under a sturdy table.</li>
+                <li>🌳 If outdoors, stay away from buildings and trees.</li>
+                <li>🏢 If near the coast, move to higher ground in case of a tsunami.</li>
+            </ul>
+        `;
+
+        // Display tips
+        safetyTipsDiv.innerHTML = tips;
+    }
+});
+
