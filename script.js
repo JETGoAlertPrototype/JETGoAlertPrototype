@@ -140,3 +140,16 @@ setTimeout(() => {
     addEarthquakeMarker(14.5995, 120.9842, 5.2);
 }, 3000);
 
+document.getElementById("reportForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Stop page reload
+
+    const location = document.getElementById("location").value;
+    const magnitude = document.getElementById("magnitude").value;
+    const description = document.getElementById("description").value;
+
+    alert(`📍 Earthquake Reported!\nLocation: ${location}\nMagnitude: ${magnitude}\nDetails: ${description}`);
+
+    // Reset form after submission
+    document.getElementById("reportForm").reset();
+});
+
