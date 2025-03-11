@@ -1,16 +1,30 @@
-async function fetchEarthquakeData() {
-    try {
-        const response = await fetch("https://earthquake.phivolcs.dost.gov.ph/api/recent");
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log("Fetched earthquake data:", data);
-        displayEarthquakeData(data);
-    } catch (error) {
-        console.error("Error fetching earthquake data:", error);
-        document.getElementById("alerts").innerHTML = "<p>Failed to load earthquake data.</p>";
-    }
+document.addEventListener("DOMContentLoaded", function () {
+    fetchEarthquakeData();
+});
+
+// Function to fetch earthquake data from USGS API
+function fetchEarthquakeData() {
+    const apiUrl = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&orderby=time";
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => displayEarthquakes(data.features))
+        .catch(error => console.error("Error fetching earthquake data:", error));
 }
 
-fetchEarthquakeData();
+// Function to display earthquake data
+function displayEarthquakes(earthquakes) {
+    const container = document.getElementById("alert-container");
+    container.innerHTML = ""; // Clear previous data
+
+    earthquakes.forEach(quake => {
+        const { place, mag, time } = quake.properties;
+        const date = new Date(time).toLocaleString();
+
+        const quakeElement = document.createElement("div");
+        quakeElement.classList.add("quake-item");
+        quakeElement.innerHTML = `<strong>${place}</strong> - Magnitude: ${mag} | ${date}`;
+        
+        container.appendChild(quakeElement);
+    });
+}
