@@ -153,3 +153,18 @@ document.getElementById("reportForm").addEventListener("submit", function(event)
     document.getElementById("reportForm").reset();
 });
 
+async function fetchEarthquakeData() {
+    const response = await fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson");
+    const data = await response.json();
+
+    data.features.forEach(quake => {
+        const magnitude = quake.properties.mag;
+        const place = quake.properties.place;
+        const time = new Date(quake.properties.time).toLocaleString();
+
+        console.log(`🌍 ${magnitude}M quake near ${place} at ${time}`);
+    });
+}
+
+// Run function when page loads
+fetchEarthquakeData();
