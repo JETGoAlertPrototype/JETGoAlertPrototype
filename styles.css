@@ -1,4 +1,4 @@
-/* 🌍 General Styles */
+/* 🌍 General Styles */ 
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -10,41 +10,36 @@ body {
 
 /* 🔝 Navbar - Fully Fixed at the Top */
 .navbar {
-    .navbar {
-    position: fixed;
+    position: fixed !important;  /* ✅ Forces it to stay fixed */
     top: 0;
     left: 0;
     width: 100%;
     background: #333;
     color: white;
     padding: 15px 20px;
-    z-index: 1000; /* Ensures it stays above other content */
+    z-index: 9999; /* ✅ Super high to stay above everything */
     height: 70px; /* ✅ Prevents layout shifts */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* 📌 Prevent Content from Being Covered */
 body {
     margin: 0;
-    padding: 0;
     padding-top: 70px !important; /* ✅ Pushes everything below navbar */
 }
 
-/* 🛠 Fix Scrolling Issues */
+/* 📌 Fix Any Parent Elements Interfering */
 html, body {
     overflow-x: hidden; /* ✅ Prevents weird shifts */
-    position: relative;
+    position: relative; /* ✅ Ensures navbar stays above */
 }
 
-/* 🚨 Remove Any Parent Issues */
+/* 📌 Remove Any transform Issues */
 * {
-    transform: none !important;
-    will-change: unset !important;
+    transform: none !important; /* ✅ Stops any movement */
 }
-
 
 .nav-logo {
     font-size: 1.5em;
