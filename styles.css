@@ -11,7 +11,7 @@ body {
 /* 🔝 Navbar Styles */
 .navbar {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
     align-items: center;
     background: #333;
     padding: 5px 5px;
@@ -256,13 +256,13 @@ button:active {
 
 #reportButton {
     position: fixed;
-    bottom: 20px;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     background-color: #ff4500;
     color: white;
-    padding: 15px 20px;
-    font-size: 18px;
+    padding: 10px 15px;
+    font-size: 14px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
