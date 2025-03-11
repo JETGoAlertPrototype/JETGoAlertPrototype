@@ -110,3 +110,29 @@ body.dark-mode {
 .delete-btn:hover {
     background: darkred;
 }
+
+/* Default Light Mode */
+body {
+    background-color: white;
+    color: black;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+/* Button Styling */
+#darkModeToggle {
+    padding: 10px;
+    background-color: #444;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#darkModeToggle:hover {
+    background-color: #666;
+}
+
