@@ -133,3 +133,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: 'YOUR_API_KEY',
+  authDomain: 'YOUR_AUTH_DOMAIN',
+  projectId: 'YOUR_PROJECT_ID',
+  storageBucket: 'YOUR_STORAGE_BUCKET',
+  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+  appId: 'YOUR_APP_ID',
+  measurementId: 'YOUR_MEASUREMENT_ID'
+};
+firebase.initializeApp(firebaseConfig);
+
+const messaging = firebase.messaging();
+
+// Request permission to send notifications
+function requestNotificationPermission() {
+  Notification.requestPermission().then((permission) => {
+    if (permission === 'granted') {
+      console.log('Notification permission granted.');
+      // Get the token
+      messaging.getToken({ vapidKey: 'YOUR_PUBLIC_VAPID_KEY' }).then((currentToken) => {
+        if (currentToken) {
+          console.log('FCM Token:', currentToken);
+          // Send the token to your server to subscribe the user to notifications
+        } else {
+          console.log('No registration token available. Request permission to generate one.');
+        }
+      }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+      });
+    } else {
+      console.log('Unable to get permission to notify.');
+    }
+  });
+}
+
+// Call the function to request permission
+requestNotificationPermission();
+
