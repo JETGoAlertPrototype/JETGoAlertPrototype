@@ -46,6 +46,36 @@
 
     <script src="earthquake.js"></script>
     <script defer src="js/earthquake.js"></script>
+    <script>
+async function fetchPHIVOLCSEarthquakeData() {
+    try {
+        const response = await fetch('https://earthquake.phivolcs.dost.gov.ph/');
+        const text = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
+        const earthquakeTable = doc.querySelector('.eq-list'); // Adjust selector as needed
+        const rows = earthquakeTable.querySelectorAll('tr');
+
+        const earthquakes = [];
+        rows.forEach(row => {
+            const columns = row.querySelectorAll('td');
+            if (columns.length > 0) {
+                const date = columns[0].innerText;
+                const magnitude = columns[1].innerText;
+                const location = columns[2].innerText;
+                earthquakes.push({ date, magnitude, location });
+            }
+        });
+
+        console.log(earthquakes); // Replace with logic to display on your page
+    } catch (error) {
+        console.error("Error fetching earthquake data:", error);
+    }
+}
+
+fetchPHIVOLCSEarthquakeData();
+</script>
+
 
     <footer>
         <p>JET GO ALERT &copy; 2025</p>
