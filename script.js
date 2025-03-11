@@ -15,8 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
-
 /* 🚪 LOGOUT FUNCTION */
 document.getElementById("logoutButton")?.addEventListener("click", () => {
     localStorage.removeItem("studentCode");
@@ -159,4 +157,48 @@ document.getElementById("reportForm")?.addEventListener("submit", function(event
 
     // Reset form after submission
     document.getElementById("reportForm").reset();
+});
+
+/* ✅ STEP 1: VALIDATE STUDENT CODES */
+document.getElementById("studentLoginForm")?.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const studentCode = document.getElementById("studentCode").value;
+    const validCodes = ["123456", "654321", "987654"]; // Example codes
+
+    if (validCodes.includes(studentCode)) {
+        localStorage.setItem("studentCode", studentCode);
+        window.location.href = "dashboard.html"; // Redirect to dashboard
+    } else {
+        alert("🚫 Invalid student code. Please try again.");
+    }
+});
+
+/* ✅ STEP 3: FILTER EARTHQUAKE DATA */
+document.getElementById("filterMagnitude")?.addEventListener("change", function() {
+    const selectedMagnitude = parseFloat(this.value);
+
+    quakeMarkers.forEach(marker => {
+        const markerMagnitude = parseFloat(marker.getTitle().replace("Magnitude: ", ""));
+        marker.setVisible(markerMagnitude >= selectedMagnitude);
+    });
+});
+
+/* ✅ STEP 4: EMERGENCY CONTACT LIST */
+document.getElementById("addContactForm")?.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const contactName = document.getElementById("contactName").value;
+    const contactNumber = document.getElementById("contactNumber").value;
+    const contactList = document.getElementById("contactList");
+
+    if (contactName && contactNumber) {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${contactName}: ${contactNumber}`;
+        contactList.appendChild(listItem);
+
+        document.getElementById("addContactForm").reset();
+    } else {
+        alert("⚠️ Please fill in both fields.");
+    }
 });
