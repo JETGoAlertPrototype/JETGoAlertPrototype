@@ -17,29 +17,33 @@ body {
     background: #333;
     color: white;
     padding: 15px 20px;
-    z-index: 9999; /* ✅ Super high to stay above everything */
+    z-index: 10000; /* ✅ Ensures it's on top */
     height: 70px; /* ✅ Prevents layout shifts */
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* 📌 Prevent Content from Being Covered */
 body {
     margin: 0;
+    padding: 0;
     padding-top: 70px !important; /* ✅ Pushes everything below navbar */
 }
 
-/* 📌 Fix Any Parent Elements Interfering */
+/* 🛠 Fix Scrolling Issues */
 html, body {
     overflow-x: hidden; /* ✅ Prevents weird shifts */
-    position: relative; /* ✅ Ensures navbar stays above */
+    position: relative;
 }
 
-/* 📌 Remove Any `transform` Issues */
+/* 🚨 Remove Any Parent Issues */
 * {
-    transform: none !important; /* ✅ Stops any movement */
+    transform: none !important;
+    will-change: unset !important;
 }
+
 
 .nav-logo {
     font-size: 1.5em;
