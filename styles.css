@@ -221,3 +221,23 @@ button:active {
 #reportButton:hover {
     background: #d14000;
 }
+
+#reportButton {
+    position: fixed; /* Sticks it to the screen */
+    bottom: 20px; /* Distance from bottom */
+    left: 50%; /* Centers it */
+    transform: translateX(-50%); /* Ensures exact centering */
+    background-color: #ff4500; /* Alert color */
+    color: white;
+    padding: 15px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#reportButton:hover {
+    background-color: #d14000;
+}
