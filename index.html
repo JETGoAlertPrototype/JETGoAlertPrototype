@@ -4,195 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JET GO ALERT</title>
-
-    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="style.css"> <!-- Ensure correct linking -->
-
-    <!-- Firebase SDK (Fixed Order) -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
-
-    <!-- Now load your custom Firebase script -->
-    <script type="module" src="js/firebase.js"></script>
-
-    <!-- Google Maps API (Replace YOUR_NEW_API_KEY) -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_NEW_API_KEY&callback=initMap"></script>
-
-    <!-- Leaflet JS for OpenStreetMap -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <script defer src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-
-    <!-- Alert Sound -->
-    <audio id="alertSound">
-        <source src="alerts.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Inline Styles -->
-    <style>
-        #map { height: 400px; width: 100%; }
-        .dark-mode { background-color: #121212; color: white; }
-    </style>
 </head>
-
 <body>
 
-    <!-- 🔝 Top Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-logo">JET GO ALERT</div>
-        <div class="menu-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">JET GO ALERT</a>
+            <ul class="nav-links">
+                <li><a href="#earthquake-map">Earthquake Map</a></li>
+                <li><a href="#alerts">Alerts</a></li>
+                <li><a href="#get-alert">Get Alert</a></li>
+                <li><a href="#report">Report an Earthquake</a></li>
+                <li><a href="#trigger-alert">Trigger Alert</a></li>
+                <li><a href="#user-reports">User Reports</a></li>
+            </ul>
         </div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Safety Tips</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
     </nav>
 
-    <!-- Header -->
-    <header>
-        <h1>JET GO ALERT</h1>
-        <button id="darkModeToggle" aria-label="Toggle Dark Mode">🌙 Dark Mode</button>
-    </header>
+    <!-- Earthquake Map (Moved to the Top) -->
+    <section id="earthquake-map">
+        <h2>Live Earthquake Map</h2>
+        <iframe 
+            src="https://www.google.com/maps/embed?..." 
+            width="100%" height="450">
+        </iframe>
+    </section>
 
-    <!-- Main Content -->
-    <main>
+    <!-- Alerts Section -->
+    <section id="alerts">
+        <h2>Real-Time Earthquake Alerts</h2>
+        <p>Stay updated with real-time earthquake alerts and safety instructions.</p>
+    </section>
 
-        <!-- Emergency Preparedness Section -->
-        <section class="safety-section">
-            <h2>🚨 Emergency Preparedness</h2>
-            <ul>
-                <li>🔦 Keep a flashlight & extra batteries</li>
-                <li>🥫 Store non-perishable food</li>
-                <li>💧 Have enough drinking water</li>
-                <li>📞 Memorize emergency contacts</li>
-            </ul>
-            <a href="emergency-checklist.pdf" download class="btn-download">📄Download Checklist</a>
-        </section>
+    <!-- Get Alert Section -->
+    <section id="get-alert">
+        <h2>Get Alert</h2>
+        <button id="check-earthquake-btn">Check Earthquake Data</button>
+    </section>
 
-        <!-- Action Buttons -->
-        <section class="buttons">
-            <a href="alerts.html" class="btn">📢 Get Alerts</a>
-            <a href="report.html" class="btn">✍️ Report an Earthquake</a>
-            <button onclick="showAlert('🌍 Test earthquake: Magnitude 5.2 detected!')">Trigger Alert</button>
-        </section>
+    <!-- Report an Earthquake Section -->
+    <section id="report">
+        <h2>Report an Earthquake</h2>
+        <form>
+            <label for="quake-experience">Describe your experience:</label>
+            <textarea id="quake-experience" rows="4"></textarea>
+            <button type="submit">Submit Report</button>
+        </form>
+    </section>
 
-        <!-- Earthquake Alerts Section -->
-        <section id="alerts">
-            <h2>Earthquake Alerts</h2>
-            <div id="alert-container"></div> <!-- Alert Container Added -->
-        </section>
+    <!-- Trigger Alert Button -->
+    <section id="trigger-alert">
+        <h2>Trigger Earthquake Alert</h2>
+        <button id="trigger-alert-btn">Trigger Alert</button>
+    </section>
 
-        <!-- Earthquake Map Section -->
-        <section id="quake-map">
-            <h2>Earthquake Map</h2>
-            <div id="map"></div>
-        </section>
+    <!-- User Reports Section -->
+    <section id="user-reports">
+        <h2>User-Reported Earthquakes</h2>
+        <p>See reports from other users.</p>
+    </section>
 
-        <!-- User Reports Section -->
-        <section id="reports">
-            <h2>User Reports</h2>
-            <textarea id="user-report" placeholder="Describe your experience..." aria-label="Describe your experience"></textarea>
-            <button id="report-submit" aria-label="Submit report">Submit</button>
-            <div id="report-list"></div>
-        </section>
+    <!-- Emergency Preparedness List (DEPED Guidelines) -->
+    <section id="emergency-preparedness">
+        <h2>Emergency Preparedness (DEPED Guidelines)</h2>
+        <ul>
+            <li>🔹 Follow the “Duck, Cover, and Hold” drill.</li>
+            <li>🔹 Stay away from glass, windows, and heavy objects.</li>
+            <li>🔹 After the shaking stops, evacuate in an orderly manner.</li>
+            <li>🔹 Follow your school's emergency evacuation plan.</li>
+            <li>🔹 Gather at the designated assembly area.</li>
+            <li>🔹 Wait for further instructions from school authorities.</li>
+        </ul>
+    </section>
 
-        <!-- User Location & Safety Tips -->
-        <section id="user-location">
-            <h2>Your Location & Safety Tips</h2>
-            <button id="getLocation">Find My Location</button>
-            <p id="location-output">Click the button to get your location.</p>
-            <div id="safety-tips"></div>
-        </section>
+    <!-- User Location & Safety Tips -->
+    <section id="location-safety">
+        <h2>Your Location & Safety Tips</h2>
+        <button id="get-location-btn">Get My Location</button>
+        <p id="location-display">📍 Your location will appear here.</p>
+    </section>
 
-        <!-- Earthquake Report Form -->
-        <section class="report-section">
-            <h2>📍 Report an Earthquake</h2>
-            <form id="reportForm">
-                <label>Location:</label>
-                <input type="text" id="location" required placeholder="Enter city or coordinates">
-                
-                <label>Magnitude:</label>
-                <input type="number" id="magnitude" min="1" max="10" step="0.1" required placeholder="Magnitude (e.g., 5.2)">
-                
-                <label>Description:</label>
-                <textarea id="description" required placeholder="Describe the shaking intensity..."></textarea>
-                
-                <button type="submit">📤 Submit Report</button>
-            </form>
-        </section>
-
-        <!-- Report Floating Button -->
-        <button id="reportButton">
-            <a href="report.html" class="btn">🚨 Report an Earthquake</a>
-        </button>
-
-        <button onclick="fetchEarthquakeData()" class="check-earthquake-btn">Check Earthquake Data</button>
-
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>JET GO ALERT &copy; 2025</p>
-    </footer>
-
-    <!-- JavaScript Files -->
-    <script defer src="js/main.js"></script>
-    <script src="js/earthquake.js"></script>
-    <script defer src="js/reports.js"></script>
-    <script defer src="script.js"></script> <!-- Ensure correct linking -->
-
-    <!-- Firebase Notification Handling -->
-    <script>
-        const messaging = firebase.messaging();
-
-        messaging.onMessage((payload) => {
-            console.log("Message received:", payload);
-            const notificationTitle = payload.notification.title;
-            const notificationOptions = {
-                body: payload.notification.body,
-                icon: "/firebase-logo.png",
-            };
-            new Notification(notificationTitle, notificationOptions);
-        });
-    </script>
-
-    <!-- Earthquake Data Fetch & User Reports -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            var map = L.map('map').setView([14.5995, 120.9842], 6);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors'
-            }).addTo(map);
-
-            async function fetchEarthquakeData() {
-                try {
-                    const response = await fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson');
-                    if (!response.ok) throw new Error('Network response was not ok');
-
-                    const data = await response.json();
-                    const earthquakes = data.features.filter(eq => eq.properties.place.includes('Philippines'));
-
-                    document.getElementById("alert-container").innerHTML = earthquakes.length 
-                        ? earthquakes.map(eq => `<p><strong>${new Date(eq.properties.time).toLocaleString()}</strong>: M${eq.properties.mag} - ${eq.properties.place}</p>`).join("")
-                        : "No recent earthquakes detected.";
-
-                } catch (error) {
-                    console.error("Error fetching earthquake data:", error);
-                    document.getElementById("alert-container").innerHTML = "Error loading data.";
-                }
-            }
-            fetchEarthquakeData();
-            setInterval(fetchEarthquakeData, 120000);
-        });
-        <script src="js/alerts.js"></script>
-<script src="js/earthquake.js"></script>
-
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
