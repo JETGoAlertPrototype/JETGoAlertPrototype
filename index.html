@@ -5,24 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JET GO ALERT</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script> <!-- Ensure script loads after HTML -->
 </head>
 <body>
 
-    <!-- 🔝 Header (Fixed Cut-Off Text) -->
-    <header class="nav-container">
-        <h1 class="logo">JET GO ALERT</h1>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#earthquake-map-section">Map</a></li>
-                <li><a href="#alerts">Alerts</a></li>
-                <li><a href="#get-alert">Get Alert</a></li>
-                <li><a href="#report-earthquake">Report</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- 🔝 Navigation Bar -->
+    <nav class="nav-container">
+        <h1>JET GO ALERT</h1>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Alerts</a></li>
+            <li><a href="#">Reports</a></li>
+        </ul>
+    </nav>
 
-    <!-- 🌍 Earthquake Map (Fixed) -->
+    <!-- 🌍 Earthquake Map -->
     <section id="earthquake-map-section">
         <h2>Earthquake Map</h2>
         <div id="earthquake-map"></div>
@@ -48,7 +44,7 @@
         <button id="submit-report">Submit Report</button>
     </section>
 
-    <!-- 📋 User Reports Section -->
+    <!-- 📋 User Reports -->
     <section id="user-reports-section">
         <h2>User Reports</h2>
         <ul id="user-reports"></ul>
@@ -59,9 +55,8 @@
         <button id="check-earthquake-data">Check Earthquake Data</button>
     </div>
 
-    <!-- 🔗 Google Maps API -->
+    <!-- 🔗 Scripts -->
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
-
