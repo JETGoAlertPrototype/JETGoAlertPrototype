@@ -4,90 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JET GO ALERT</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- 🔝 Navigation Bar -->
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="logo">JET GO ALERT</a>
-            <ul class="nav-links">
-                <li><a href="#earthquake-map">Earthquake Map</a></li>
-                <li><a href="#alerts">Alerts</a></li>
-                <li><a href="#get-alert">Get Alert</a></li>
-                <li><a href="#report">Report</a></li>
-                <li><a href="#trigger-alert">Trigger Alert</a></li>
-                <li><a href="#user-reports">User Reports</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- 🌍 Live Earthquake Map -->
-    <section id="earthquake-map">
-        <h2>Live Earthquake Map</h2>
-        <div class="map-container">
-            <iframe 
-                src="https://www.google.com/maps/embed?..." 
-                width="100%" height="450" style="border:0;" allowfullscreen="">
-            </iframe>
-        </div>
+    <!-- Earthquake Map (Moved to Top) -->
+    <section id="earthquake-map-section">
+        <h2>Earthquake Map</h2>
+        <div id="earthquake-map"></div>
     </section>
 
-    <!-- 🚨 Real-Time Alerts -->
+    <!-- Alerts Section -->
     <section id="alerts">
-        <h2>Real-Time Earthquake Alerts</h2>
-        <p>Stay updated with real-time earthquake alerts and safety instructions.</p>
+        <h2>Recent Earthquake Alerts</h2>
+        <div id="earthquake-alerts">No alerts available.</div>
     </section>
 
-    <!-- 📡 Get Alert -->
+    <!-- Get Alert Section -->
     <section id="get-alert">
         <h2>Get Alert</h2>
-        <button id="check-earthquake-btn">Check Earthquake Data</button>
+        <button id="find-location">Find My Location</button>
+        <p id="user-location">Your location will appear here.</p>
     </section>
 
-    <!-- 📢 Report an Earthquake -->
-    <section id="report">
+    <!-- Report an Earthquake (Consolidated) -->
+    <section id="report-earthquake">
         <h2>Report an Earthquake</h2>
-        <form>
-            <label for="quake-experience">Describe your experience:</label>
-            <textarea id="quake-experience" rows="4"></textarea>
-            <button type="submit">Submit Report</button>
-        </form>
+        <textarea id="report-text" placeholder="Describe the earthquake experience..."></textarea>
+        <button id="submit-report">Submit Report</button>
     </section>
 
-    <!-- 🚨 Trigger Alert -->
-    <section id="trigger-alert">
-        <h2>Trigger Earthquake Alert</h2>
-        <button id="trigger-alert-btn">Trigger Alert</button>
+    <!-- User Reports Section -->
+    <section id="user-reports-section">
+        <h2>User Reports</h2>
+        <ul id="user-reports"></ul>
     </section>
 
-    <!-- 🌏 User Reports -->
-    <section id="user-reports">
-        <h2>User-Reported Earthquakes</h2>
-        <p>See reports from other users.</p>
-    </section>
+    <!-- Centered Button -->
+    <div class="center-button">
+        <button id="check-earthquake-data">Check Earthquake Data</button>
+    </div>
 
-    <!-- 📜 Emergency Preparedness -->
-    <section id="emergency-preparedness">
-        <h2>Emergency Preparedness (DEPED Guidelines)</h2>
-        <ul>
-            <li>🔹 Follow the “Duck, Cover, and Hold” drill.</li>
-            <li>🔹 Stay away from glass, windows, and heavy objects.</li>
-            <li>🔹 After the shaking stops, evacuate in an orderly manner.</li>
-            <li>🔹 Follow your school's emergency evacuation plan.</li>
-            <li>🔹 Gather at the designated assembly area.</li>
-            <li>🔹 Wait for further instructions from school authorities.</li>
-        </ul>
-    </section>
-
-    <!-- 📍 User Location & Safety Tips -->
-    <section id="location-safety">
-        <h2>Your Location & Safety Tips</h2>
-        <button id="get-location-btn">Get My Location</button>
-        <p id="location-display">📍 Your location will appear here.</p>
-    </section>
-
+    <!-- Include Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
     <script src="script.js"></script>
 </body>
 </html>
