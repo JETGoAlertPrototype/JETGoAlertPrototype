@@ -3,56 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - JET GO ALERT</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <script src="assets/js/auth.js" defer></script>
-<style>
-    body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 30;
-            background-color: #FFB6C1;
-            font-family: Arial, sans-serif;
-        }
-        .login-container {
-            background-color: #FFB6C1;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-        .login-container label {
-            display: block;
-            margin-bottom: 25px;
-            color: #FFB3DE;
-        }
-        .login-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #A865B5;
-            border: none;
-            border-radius: 20px;
-            color: #E7ACCF;
-            font-size: 20px;
-            cursor: pointer;
-        }
-        .login-container button:hover {
-            background-color: #D8BFD8;
-        }
-</style>
+    <title>JET GO ALERT - Login</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <section id="login-container">
-        <center>
-            <h2>Student Login</h2>
-        </center>
-        <form id="loginForm">
-            <label for="studentCode">Student Code:</label>
-            <input type="text" id="studentCode" placeholder="SC123456" required>
+    <div class="login-container">
+        <h2>Login to JET GO ALERT</h2>
+        <form id="login-form">
+            <input type="text" id="name" placeholder="Enter your name" required>
+            <input type="text" id="lrn" placeholder="Enter your LRN (12 digits)" pattern="\d{12}" required>
             <button type="submit">Login</button>
         </form>
-    </section>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
