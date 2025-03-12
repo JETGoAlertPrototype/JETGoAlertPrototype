@@ -1,18 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
     // 🌍 Get User Location (FIXED)
-    document.getElementById("get-location-btn").addEventListener("click", function () {
+    document.getElementById("find-location").addEventListener("click", function () {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 function (position) {
                     let latitude = position.coords.latitude;
                     let longitude = position.coords.longitude;
                     
-                    document.getElementById("location-display").textContent =
+                    document.getElementById("user-location").textContent =
                         `📍 Latitude: ${latitude}, Longitude: ${longitude}`;
 
-                    // Update Google Maps iframe
-                    let mapIframe = document.getElementById("map-iframe");
-                    mapIframe.src = `https://www.google.com/maps?q=${latitude},${longitude}&output=embed`;
+                    // Update Google Maps iframe (if needed)
+                    let mapIframe = document.getElementById("earthquake-map");
+                    if (mapIframe) {
+                        mapIframe.innerHTML = `<iframe width="100%" height="300" src="https://www.google.com/maps?q=${latitude},${longitude}&output=embed"></iframe>`;
+                    }
                 },
                 function () {
                     alert("Unable to retrieve your location.");
@@ -24,19 +26,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 🚨 Trigger Earthquake Alert (FIXED)
-    document.getElementById("trigger-alert-btn").addEventListener("click", function () {
+    document.getElementById("submit-report").addEventListener("click", function () {
         playAlertSound();
         showAlert("🚨 Earthquake alert triggered!", "red");
     });
 
     // 📡 Check Earthquake Data (Placeholder API Call)
-    document.getElementById("check-earthquake-btn").addEventListener("click", function () {
+    document.getElementById("check-earthquake-data").addEventListener("click", function () {
         fetchEarthquakeData();
     });
 
     // 📢 Report an Earthquake (FIXED)
-    document.getElementById("report-form").addEventListener("submit", function (event) {
-        event.preventDefault();
+    document.getElementById("submit-report").addEventListener("click", function () {
         let experience = document.getElementById("quake-experience").value.trim();
         if (experience === "") {
             alert("Please enter your earthquake experience.");
@@ -80,9 +81,8 @@ function fetchEarthquakeData() {
 
 /* 🌏 Add User Report */
 function addUserReport(experience) {
-    let reportsContainer = document.getElementById("reports-container");
-    let reportDiv = document.createElement("div");
-    reportDiv.classList.add("user-report");
-    reportDiv.textContent = `📢 ${experience}`;
-    reportsContainer.appendChild(reportDiv);
+    let reportsContainer = document.getElementById("user-reports");
+    let reportItem = document.createElement("li");
+    reportItem.textContent = `📢 ${experience}`;
+    reportsContainer.appendChild(reportItem);
 }
