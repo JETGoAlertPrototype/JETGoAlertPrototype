@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JET GO ALERT</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script> <!-- Defer loading script -->
 </head>
 <body>
 
-    <!-- 🔝 Navigation Bar (Added) -->
+    <!-- 🔝 Header -->
     <header class="nav-container">
         <h1>JET GO ALERT</h1>
         <nav>
@@ -17,12 +18,11 @@
                 <li><a href="#alerts">Alerts</a></li>
                 <li><a href="#get-alert">Get Alert</a></li>
                 <li><a href="#report-earthquake">Report</a></li>
-                <li><a href="#user-reports-section">User Reports</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- 🌍 Earthquake Map (Moved to Top) -->
+    <!-- 🌍 Earthquake Map (Fixed) -->
     <section id="earthquake-map-section">
         <h2>Earthquake Map</h2>
         <div id="earthquake-map"></div>
@@ -59,8 +59,8 @@
         <button id="check-earthquake-data">Check Earthquake Data</button>
     </div>
 
-    <!-- 🔗 Scripts -->
+    <!-- 🔗 Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
-    <script src="script.js"></script>
+
 </body>
 </html>
