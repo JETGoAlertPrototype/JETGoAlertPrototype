@@ -8,33 +8,20 @@
 </head>
 <body>
 
-    <!-- 🔝 Navigation Bar -->
+    <!-- 🔝 Navigation Bar (Smaller) -->
     <div class="nav-container">
-        <h1>JET GO ALERT</h1>
+        <h1 class="small-header">JET GO ALERT</h1>
         <ul class="nav-links">
-            <li><a href="#earthquake-map-section">Map</a></li>
             <li><a href="#alerts">Alerts</a></li>
             <li><a href="#report-earthquake">Report</a></li>
+            <li><a href="#earthquake-map-section">Map</a></li>
         </ul>
     </div>
-
-    <!-- 🌍 Earthquake Map (Moved to Top) -->
-    <section id="earthquake-map-section">
-        <h2>Earthquake Map</h2>
-        <div id="earthquake-map"></div>
-    </section>
 
     <!-- 🚨 Alerts Section -->
     <section id="alerts">
         <h2>Recent Earthquake Alerts</h2>
         <div id="earthquake-alerts">No alerts available.</div>
-    </section>
-
-    <!-- 📍 Get Alert Section -->
-    <section id="get-alert">
-        <h2>Get Alert</h2>
-        <button id="find-location">Find My Location</button>
-        <p id="user-location">Your location will appear here.</p>
     </section>
 
     <!-- 📢 Report an Earthquake -->
@@ -50,13 +37,20 @@
         <ul id="user-reports"></ul>
     </section>
 
-    <!-- 📊 Centered Button -->
-    <div class="center-button">
-        <button id="check-earthquake-data">Check Earthquake Data</button>
-    </div>
+    <!-- 🌍 Earthquake Map (Moved Down & Fixed) -->
+    <section id="earthquake-map-section">
+        <h2>Earthquake Map</h2>
+        <div id="earthquake-map"></div>
+    </section>
+
+    <!-- 📍 Get Location Button -->
+    <section id="get-alert">
+        <h2>Get Alert</h2>
+        <button id="find-location">Find My Location</button>
+        <p id="user-location">Your location will appear here.</p>
+    </section>
 
     <!-- 🔗 Scripts -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
     <script src="script.js"></script>
 </body>
 </html>
