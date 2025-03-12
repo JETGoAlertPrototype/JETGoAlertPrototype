@@ -1,54 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Script loaded!");
-
-    // Initialize the Earthquake Map
-    let map;
-    function initMap() {
-        map = new google.maps.Map(document.getElementById("earthquake-map"), {
-            center: { lat: 14.5995, lng: 120.9842 }, // Default: Manila
-            zoom: 6,
-        });
-
-        // Fetch earthquake data and plot markers
-        fetchEarthquakeData();
-    }
-
-    function fetchEarthquakeData() {
-        fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson")
-            .then((response) => response.json())
-            .then((data) => {
-                data.features.forEach((quake) => {
-                    let coords = {
-                        lat: quake.geometry.coordinates[1],
-                        lng: quake.geometry.coordinates[0],
-                    };
-                    new google.maps.Marker({
-                        position: coords,
-                        map: map,
-                        title: `Magnitude: ${quake.properties.mag}`,
-                    });
-                });
-            })
-            .catch((error) => console.error("Error fetching earthquake data:", error));
-    }
-
-    // Fix "Find My Location" Button
-    document.getElementById("find-location").addEventListener("click", function () {
+    // 🌍 Get User Location (FIXED)
+    document.getElementById("get-location-btn").addEventListener("click", function () {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 function (position) {
-                    let lat = position.coords.latitude;
-                    let lng = position.coords.longitude;
-                    document.getElementById("user-location").innerText = `Latitude: ${lat}, Longitude: ${lng}`;
-                    map.setCenter({ lat, lng });
-                    new google.maps.Marker({
-                        position: { lat, lng },
-                        map: map,
-                        title: "Your Location",
-                    });
+                    let latitude = position.coords.latitude;
+                    let longitude = position.coords.longitude;
+                    
+                    document.getElementById("location-display").textContent =
+                        `📍 Latitude: ${latitude}, Longitude: ${longitude}`;
+
+                    // Update Google Maps iframe
+                    let mapIframe = document.getElementById("map-iframe");
+                    mapIframe.src = `https://www.google.com/maps?q=${latitude},${longitude}&output=embed`;
                 },
-                function (error) {
-                    alert("Error getting location. Make sure location services are enabled.");
+                function () {
+                    alert("Unable to retrieve your location.");
                 }
             );
         } else {
@@ -56,20 +23,66 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Fix "User Reports" Submission
-    document.getElementById("submit-report").addEventListener("click", function () {
-        let reportText = document.getElementById("report-text").value;
-        if (reportText.trim() !== "") {
-            let reportList = document.getElementById("user-reports");
-            let newReport = document.createElement("li");
-            newReport.textContent = reportText;
-            reportList.appendChild(newReport);
-            document.getElementById("report-text").value = "";
-        } else {
-            alert("Please enter a valid report.");
-        }
+    // 🚨 Trigger Earthquake Alert (FIXED)
+    document.getElementById("trigger-alert-btn").addEventListener("click", function () {
+        playAlertSound();
+        showAlert("🚨 Earthquake alert triggered!", "red");
     });
 
-    // Initialize the map
-    initMap();
+    // 📡 Check Earthquake Data (Placeholder API Call)
+    document.getElementById("check-earthquake-btn").addEventListener("click", function () {
+        fetchEarthquakeData();
+    });
+
+    // 📢 Report an Earthquake (FIXED)
+    document.getElementById("report-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        let experience = document.getElementById("quake-experience").value.trim();
+        if (experience === "") {
+            alert("Please enter your earthquake experience.");
+            return;
+        }
+        addUserReport(experience);
+        document.getElementById("quake-experience").value = ""; // Clear input after submission
+    });
 });
+
+/* 🚨 Show Alert Message */
+function showAlert(message, color) {
+    let alertBox = document.createElement("div");
+    alertBox.classList.add("alert-box");
+    alertBox.style.background = color;
+    alertBox.textContent = message;
+    document.body.appendChild(alertBox);
+
+    setTimeout(() => {
+        alertBox.remove();
+    }, 4000);
+}
+
+/* 🔊 Play Alert Sound */
+function playAlertSound() {
+    let audio = new Audio("assets/alert-sound.mp3"); // Ensure this file exists
+    audio.play();
+}
+
+/* 📡 Fetch Earthquake Data (Placeholder Example) */
+function fetchEarthquakeData() {
+    let earthquakeData = {
+        magnitude: 6.2,
+        location: "Near Antipolo City",
+        time: new Date().toLocaleString(),
+    };
+
+    let message = `🌍 Earthquake detected! \nLocation: ${earthquakeData.location} \nMagnitude: ${earthquakeData.magnitude} \nTime: ${earthquakeData.time}`;
+    showAlert(message, "orange");
+}
+
+/* 🌏 Add User Report */
+function addUserReport(experience) {
+    let reportsContainer = document.getElementById("reports-container");
+    let reportDiv = document.createElement("div");
+    reportDiv.classList.add("user-report");
+    reportDiv.textContent = `📢 ${experience}`;
+    reportsContainer.appendChild(reportDiv);
+}
