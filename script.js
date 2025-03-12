@@ -1,80 +1,75 @@
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("JET GO ALERT: Script loaded successfully.");
-
-    // Get User Location
-    const getLocationBtn = document.getElementById("get-location-btn");
-    const locationDisplay = document.getElementById("location-display");
-
-    if (getLocationBtn) {
-        getLocationBtn.addEventListener("click", () => {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const { latitude, longitude } = position.coords;
-                        locationDisplay.innerHTML = `📍 Your location: ${latitude}, ${longitude}`;
-                    },
-                    (error) => {
-                        locationDisplay.innerHTML = "❌ Location access denied.";
-                    }
-                );
-            } else {
-                locationDisplay.innerHTML = "⚠️ Geolocation is not supported in this browser.";
-            }
-        });
-    }
-
-    // Trigger Alert Button
-    const triggerAlertBtn = document.getElementById("trigger-alert-btn");
-    
-    if (triggerAlertBtn) {
-        triggerAlertBtn.addEventListener("click", () => {
-            alert("🚨 Earthquake Alert Triggered! Follow safety procedures.");
-        });
-    }
-
-    // Check Earthquake Data Button
-    const checkEarthquakeBtn = document.getElementById("check-earthquake-btn");
-
-    if (checkEarthquakeBtn) {
-        checkEarthquakeBtn.addEventListener("click", async () => {
-            try {
-                const response = await fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson");
-                const data = await response.json();
-                
-                if (data.features.length > 0) {
-                    const latestQuake = data.features[0];
-                    const { mag, place, time } = latestQuake.properties;
-                    const quakeTime = new Date(time).toLocaleString();
-                    
-                    alert(`🌍 Latest Earthquake:
-                    Magnitude: ${mag}
-                    Location: ${place}
-                    Time: ${quakeTime}`);
-                } else {
-                    alert("✅ No significant earthquakes detected today.");
+document.addEventListener("DOMContentLoaded", function () {
+    // 🌍 Get User Location
+    document.getElementById("get-location-btn").addEventListener("click", function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    document.getElementById("location-display").textContent =
+                        "📍 Latitude: " + position.coords.latitude +
+                        ", Longitude: " + position.coords.longitude;
+                },
+                function () {
+                    alert("Unable to retrieve your location.");
                 }
-            } catch (error) {
-                alert("⚠️ Failed to retrieve earthquake data.");
-                console.error("Error fetching earthquake data:", error);
-            }
-        });
-    }
+            );
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    });
 
-    // Report an Earthquake Submission
-    const reportForm = document.querySelector("#report form");
+    // 🚨 Trigger Earthquake Alert
+    document.getElementById("trigger-alert-btn").addEventListener("click", function () {
+        showAlert("🚨 Earthquake alert triggered!", "red");
+    });
 
-    if (reportForm) {
-        reportForm.addEventListener("submit", (event) => {
-            event.preventDefault();
-            const experienceText = document.getElementById("quake-experience").value;
+    // 📡 Check Earthquake Data (Placeholder API Call)
+    document.getElementById("check-earthquake-btn").addEventListener("click", function () {
+        fetchEarthquakeData();
+    });
 
-            if (experienceText.trim() === "") {
-                alert("⚠️ Please describe your earthquake experience.");
-                return;
-            }
-
-            alert("✅ Earthquake report submitted successfully!");
-            document.getElementById("quake-experience").value = "";
-        });
-    }
+    // 📢 Report an Earthquake
+    document.querySelector("#report form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        let experience = document.getElementById("quake-experience").value;
+        if (experience.trim() === "") {
+            alert("Please enter your earthquake experience.");
+            return;
+        }
+        addUserReport(experience);
+        document.getElementById("quake-experience").value = ""; // Clear input after submission
+    });
 });
+
+/* 🚨 Show Alert Message */
+function showAlert(message, color) {
+    let alertBox = document.createElement("div");
+    alertBox.classList.add("alert-box");
+    alertBox.style.background = color;
+    alertBox.textContent = message;
+    document.body.appendChild(alertBox);
+
+    setTimeout(() => {
+        alertBox.remove();
+    }, 3000);
+}
+
+/* 📡 Fetch Earthquake Data (Placeholder Example) */
+function fetchEarthquakeData() {
+    let earthquakeData = {
+        magnitude: 6.2,
+        location: "Near Antipolo City",
+        time: new Date().toLocaleString(),
+    };
+
+    let message = `🌍 Earthquake detected! \nLocation: ${earthquakeData.location} \nMagnitude: ${earthquakeData.magnitude} \nTime: ${earthquakeData.time}`;
+    showAlert(message, "orange");
+}
+
+/* 🌏 Add User Report */
+function addUserReport(experience) {
+    let userReportsSection = document.getElementById("user-reports");
+    let reportDiv = document.createElement("div");
+    reportDiv.classList.add("user-report");
+    reportDiv.textContent = `📢 ${experience}`;
+    userReportsSection.appendChild(reportDiv);
+}
