@@ -8,15 +8,25 @@
 </head>
 <body>
 
-    <!-- 🔝 Navigation Bar (Smaller) -->
+    <!-- 🔝 Navigation Bar -->
     <div class="nav-container">
         <h1 class="small-header">JET GO ALERT</h1>
         <ul class="nav-links">
+            <li><a href="#earthquake-map-section">Map</a></li>
             <li><a href="#alerts">Alerts</a></li>
             <li><a href="#report-earthquake">Report</a></li>
-            <li><a href="#earthquake-map-section">Map</a></li>
         </ul>
     </div>
+
+    <!-- 🌍 Earthquake Map (Moved Back to the Top) -->
+    <section id="earthquake-map-section">
+        <h2>Earthquake Map</h2>
+        <div id="earthquake-map">
+            <iframe id="map-iframe" width="100%" height="350" style="border:0;" loading="lazy"></iframe>
+        </div>
+        <button id="find-location">Find My Location</button>
+        <p id="user-location">Your location will appear here.</p>
+    </section>
 
     <!-- 🚨 Alerts Section -->
     <section id="alerts">
@@ -35,19 +45,6 @@
     <section id="user-reports-section">
         <h2>User Reports</h2>
         <ul id="user-reports"></ul>
-    </section>
-
-    <!-- 🌍 Earthquake Map (Moved Down & Fixed) -->
-    <section id="earthquake-map-section">
-        <h2>Earthquake Map</h2>
-        <div id="earthquake-map"></div>
-    </section>
-
-    <!-- 📍 Get Location Button -->
-    <section id="get-alert">
-        <h2>Get Alert</h2>
-        <button id="find-location">Find My Location</button>
-        <p id="user-location">Your location will appear here.</p>
     </section>
 
     <!-- 🔗 Scripts -->
