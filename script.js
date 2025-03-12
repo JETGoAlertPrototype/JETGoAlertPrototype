@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 🌍 Initialize Google Map
-    initMap();
-
-    // 📍 Get User Location (FIXED)
+    // 🌍 Get User Location
     document.getElementById("find-location").addEventListener("click", function () {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -13,8 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById("user-location").textContent =
                         `📍 Latitude: ${latitude}, Longitude: ${longitude}`;
 
-                    // Update map with user location
-                    updateMap(latitude, longitude);
+                    // Update Google Maps
+                    let mapDiv = document.getElementById("earthquake-map");
+                    mapDiv.innerHTML = `<iframe width="100%" height="300" src="https://www.google.com/maps?q=${latitude},${longitude}&output=embed"></iframe>`;
                 },
                 function () {
                     alert("Unable to retrieve your location.");
@@ -25,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // 🚨 Trigger Earthquake Alert (FIXED)
+    // 📢 Report an Earthquake
     document.getElementById("submit-report").addEventListener("click", function () {
         let experience = document.getElementById("quake-experience").value.trim();
         if (experience === "") {
@@ -33,80 +31,28 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        // 🔊 Play alert sound
         playAlertSound();
-        showAlert("🚨 Earthquake alert triggered!", "red");
+
+        // 💡 Flash screen effect
+        document.body.classList.add("flash");
+        setTimeout(() => {
+            document.body.classList.remove("flash");
+        }, 2000);
+
+        // 📋 Add to User Reports
         addUserReport(experience);
-        document.getElementById("quake-experience").value = ""; // Clear input after submission
+
+        // Clear input
+        document.getElementById("quake-experience").value = "";
     });
 
-    // 📡 Check Earthquake Data
-    document.getElementById("check-earthquake-data").addEventListener("click", function () {
-        fetchEarthquakeData();
-    });
 });
-
-/* 🌍 Initialize Google Map */
-function initMap() {
-    const map = new google.maps.Map(document.getElementById("earthquake-map"), {
-        center: { lat: 14.5995, lng: 120.9842 }, // Manila, Philippines
-        zoom: 6
-    });
-
-    // Example marker (Manila)
-    new google.maps.Marker({
-        position: { lat: 14.5995, lng: 120.9842 },
-        map,
-        title: "Example Earthquake"
-    });
-
-    window.currentMap = map; // Store for updating later
-}
-
-/* 📌 Update Map with User Location */
-function updateMap(latitude, longitude) {
-    let userPosition = { lat: latitude, lng: longitude };
-
-    // Center the map on the user
-    window.currentMap.setCenter(userPosition);
-    window.currentMap.setZoom(10);
-
-    // Add a marker for user location
-    new google.maps.Marker({
-        position: userPosition,
-        map: window.currentMap,
-        title: "Your Location"
-    });
-}
-
-/* 🚨 Show Alert Message */
-function showAlert(message, color) {
-    let alertBox = document.createElement("div");
-    alertBox.classList.add("alert-box");
-    alertBox.style.background = color;
-    alertBox.textContent = message;
-    document.body.appendChild(alertBox);
-
-    setTimeout(() => {
-        alertBox.remove();
-    }, 4000);
-}
 
 /* 🔊 Play Alert Sound */
 function playAlertSound() {
     let audio = new Audio("assets/alert-sound.mp3"); // Ensure this file exists
     audio.play();
-}
-
-/* 📡 Fetch Earthquake Data (Placeholder Example) */
-function fetchEarthquakeData() {
-    let earthquakeData = {
-        magnitude: 6.2,
-        location: "Near Antipolo City",
-        time: new Date().toLocaleString(),
-    };
-
-    let message = `🌍 Earthquake detected! \nLocation: ${earthquakeData.location} \nMagnitude: ${earthquakeData.magnitude} \nTime: ${earthquakeData.time}`;
-    showAlert(message, "orange");
 }
 
 /* 🌏 Add User Report */
