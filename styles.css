@@ -8,7 +8,7 @@ body {
     text-align: center;
 }
 
-/* 🔝 Navigation Bar (Fixed Text Cut-Off) */
+/* 🔝 Navigation Bar */
 .nav-container {
     display: flex;
     justify-content: space-between;
@@ -20,14 +20,6 @@ body {
     top: 0;
     width: 100%;
     z-index: 999;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.logo {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin: 0;
-    padding-left: 10px;
 }
 
 .nav-links {
@@ -42,7 +34,6 @@ body {
     text-decoration: none;
     font-size: 1.1em;
     transition: 0.3s;
-    padding: 10px;
 }
 
 .nav-links a:hover {
@@ -52,18 +43,18 @@ body {
 /* 📌 Sections */
 section {
     background: white;
-    padding: 30px;
-    margin: 100px auto 40px;
+    padding: 20px;
+    margin: 50px auto; /* Reduced spacing between boxes */
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     max-width: 700px;
     text-align: center;
 }
 
-/* 📍 Earthquake Map (Fixed Visibility) */
+/* 📍 Earthquake Map */
 #earthquake-map {
     width: 100%;
-    height: 400px; /* Increased height */
+    height: 300px;
     border-radius: 12px;
     background: #e6e6e6;
     display: flex;
@@ -102,6 +93,16 @@ button:hover {
     z-index: 9999;
 }
 
+/* 🔊 Flashing screen effect */
+.flash {
+    animation: flash-bg 0.5s infinite alternate;
+}
+
+@keyframes flash-bg {
+    from { background: red; }
+    to { background: white; }
+}
+
 /* 📋 User Reports */
 #user-reports {
     list-style: none;
@@ -115,19 +116,3 @@ button:hover {
     border-radius: 8px;
     text-align: left;
 }
-
-/* 📌 Centered Button */
-.center-button {
-    text-align: center;
-    margin-top: 20px;
-}
-
-/* ✅ Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #333;
-    color: white;
-    width: 100%;
-}
-
