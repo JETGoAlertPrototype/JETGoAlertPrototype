@@ -1,160 +1,179 @@
-/* General Styles */
-body {
-    font-family: 'Poppins', sans-serif;
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Root Variables */
+:root {
+    --primary-color: #007BFF; /* Trustworthy Blue */
+    --secondary-color: #FF3B30; /* Emergency Red */
+    --alert-color: #FFA500; /* Alert Orange */
+    --success-color: #28A745; /* Safe Green */
+    --background-color: #F4F6F9; /* Light Gray */
+    --dark-color: #1E1E2F; /* Deep Modern Dark */
+    --light-text: #EAEAEA;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Reset & Global Styles */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f0f8ff;
-    color: #333;
-    transition: background 0.3s, color 0.3s;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* Dark Mode */
-body.dark-mode {
-    background-color: #121212;
-    color: #f0f0f0;
+/* Body */
+body {
+    background-color: var(--background-color);
+    color: var(--dark-color);
+    transition: all 0.3s ease;
 }
 
-/* Smooth Transitions */
-* {
-    transition: all 0.3s ease-in-out;
-}
-
-/* Container */
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Navigation Bar */
+/* Navbar */
 nav {
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    padding: 15px 0;
-    text-align: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    border-bottom: 5px solid #004494;
+    background: var(--primary-color);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 4px 10px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-nav a {
+nav .logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
     color: white;
     text-decoration: none;
-    padding: 12px 20px;
-    font-size: 1.2em;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: background 0.3s, transform 0.2s;
+    font-weight: 500;
+    padding: 8px 15px;
+    transition: 0.3s ease-in-out;
 }
 
-nav a:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    transform: scale(1.1);
+nav ul li a:hover {
+    background-color: var(--alert-color);
+    border-radius: 5px;
 }
 
-/* Sections */
-section {
-    margin: 40px 0;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+/* Hero Section */
+.hero {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 100px 20px;
     text-align: center;
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 0px 5px 15px var(--shadow-color);
 }
 
-body.dark-mode section {
-    background: #1e1e1e;
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-top: 10px;
 }
 
 /* Buttons */
-button {
-    background: linear-gradient(135deg, #00c853, #009688);
+.btn {
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 500;
     color: white;
-    font-size: 1.1em;
-    font-weight: bold;
-    padding: 12px 18px;
+    background: var(--secondary-color);
     border: none;
-    border-radius: 25px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.2s, background 0.3s;
+    transition: 0.3s;
 }
 
-button:hover {
-    background: linear-gradient(135deg, #009688, #00796b);
-    transform: scale(1.05);
+.btn:hover {
+    background: var(--alert-color);
+    box-shadow: 0px 4px 10px var(--shadow-color);
 }
 
-body.dark-mode button {
-    background: linear-gradient(135deg, #ff9800, #ff5722);
+/* Cards */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px var(--shadow-color);
+    text-align: center;
+    transition: 0.3s;
 }
 
-body.dark-mode button:hover {
-    background: linear-gradient(135deg, #ff5722, #e64a19);
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 5px 15px var(--shadow-color);
 }
 
-/* Alerts */
+/* Alerts Section */
 .alert {
     padding: 15px;
-    font-weight: bold;
+    border-radius: 8px;
+    font-size: 1rem;
     text-align: center;
-    border-radius: 5px;
-    color: white;
+    margin: 10px 0;
 }
 
-.alert-blue {
-    background: #007bff;
-}
-
-.alert-green {
-    background: #00c853;
-}
-
-.alert-yellow {
-    background: #ffeb3b;
-    color: black;
-}
-
-.alert-orange {
-    background: #ff9800;
-}
-
-.alert-red {
-    background: #d32f2f;
-}
-
-/* Forms */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-}
-
-input, textarea {
-    width: 80%;
-    padding: 12px;
-    border: 2px solid #007bff;
-    border-radius: 10px;
-    font-size: 1em;
-}
-
-body.dark-mode input,
-body.dark-mode textarea {
-    background-color: #2a2a2a;
-    color: white;
-    border: 2px solid #ff9800;
-}
+.alert.blue { background: var(--primary-color); color: white; }
+.alert.green { background: var(--success-color); color: white; }
+.alert.yellow { background: var(--alert-color); color: white; }
+.alert.orange { background: #FF8500; color: white; }
+.alert.red { background: var(--secondary-color); color: white; }
 
 /* Footer */
 footer {
+    background: var(--dark-color);
+    color: var(--light-text);
+    padding: 20px;
     text-align: center;
-    padding: 15px;
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    color: white;
-    font-weight: bold;
-    border-top: 5px solid #004494;
+    margin-top: 40px;
+    border-top: 5px solid var(--secondary-color);
 }
 
-body.dark-mode footer {
-    background: linear-gradient(135deg, #ff9800, #ff5722);
+footer p {
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        margin-top: 10px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
 }
