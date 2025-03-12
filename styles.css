@@ -22,18 +22,34 @@ body {
     z-index: 999;
 }
 
+/* Fix Cut-Off Text */
+.nav-container h1 {
+    font-size: 1.5em;
+    white-space: nowrap;
+    margin: 0;
+}
+
+/* Make Navigation Links Wrap Properly */
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 20px;
+    flex-wrap: wrap; /* Ensures text doesn't cut off */
+    gap: 15px;
     padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    display: inline;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
-    font-size: 1.1em;
+    font-size: 1em;
     transition: 0.3s;
+    padding: 5px 10px;
+    display: block;
 }
 
 .nav-links a:hover {
@@ -44,17 +60,17 @@ body {
 section {
     background: white;
     padding: 30px;
-    margin: 80px auto;
+    margin: 100px auto; /* Increased margin so content isn't hidden under navbar */
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     max-width: 700px;
     text-align: center;
 }
 
-/* 📍 Earthquake Map */
+/* 📍 Earthquake Map - FIXED */
 #earthquake-map {
     width: 100%;
-    height: 300px;
+    height: 400px; /* Increased height for visibility */
     border-radius: 12px;
     background: #e6e6e6;
     display: flex;
