@@ -1,96 +1,90 @@
-/* 🌍 General Styles */
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: white;
-    color: black;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JET GO ALERT</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-/* 🔝 Navigation Bar */
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #ff6f91;
-    padding: 15px 20px;
-    color: white;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 999;
-}
+    <!-- 🔝 Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">JET GO ALERT</a>
+            <ul class="nav-links">
+                <li><a href="#earthquake-map">Earthquake Map</a></li>
+                <li><a href="#alerts">Alerts</a></li>
+                <li><a href="#get-alert">Get Alert</a></li>
+                <li><a href="#report">Report</a></li>
+                <li><a href="#trigger-alert">Trigger Alert</a></li>
+                <li><a href="#user-reports">User Reports</a></li>
+            </ul>
+        </div>
+    </nav>
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
+    <!-- 🌍 Live Earthquake Map (Fixed Loading Issue) -->
+    <section id="earthquake-map">
+        <h2>Live Earthquake Map</h2>
+        <div class="map-container">
+            <iframe id="map-iframe" width="100%" height="450" style="border:0;" allowfullscreen=""></iframe>
+        </div>
+    </section>
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.1em;
-    transition: 0.3s;
-}
+    <!-- 🚨 Real-Time Alerts -->
+    <section id="alerts">
+        <h2>Real-Time Earthquake Alerts</h2>
+        <p>Stay updated with real-time earthquake alerts and safety instructions.</p>
+    </section>
 
-.nav-links a:hover {
-    color: #ffadad;
-}
+    <!-- 📡 Get Alert -->
+    <section id="get-alert">
+        <h2>Get Alert</h2>
+        <button id="check-earthquake-btn">Check Earthquake Data</button>
+    </section>
 
-/* 📌 Sections */
-section {
-    background: #fff0f5;
-    padding: 50px;
-    margin: 20px auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    max-width: 700px;
-    text-align: center;
-}
+    <!-- 📢 Report an Earthquake -->
+    <section id="report">
+        <h2>Report an Earthquake</h2>
+        <form id="report-form">
+            <label for="quake-experience">Describe your experience:</label>
+            <textarea id="quake-experience" rows="4"></textarea>
+            <button type="submit">Submit Report</button>
+        </form>
+    </section>
 
-/* 📍 Earthquake Map */
-.map-container {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(255, 111, 145, 0.4);
-}
+    <!-- 🚨 Trigger Alert -->
+    <section id="trigger-alert">
+        <h2>Trigger Earthquake Alert</h2>
+        <button id="trigger-alert-btn">Trigger Alert</button>
+    </section>
 
-/* 🎭 Buttons */
-button {
-    background: linear-gradient(135deg, #ff6f61, #ff758c);
-    color: white;
-    padding: 12px 20px;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
-}
+    <!-- 🌏 User Reports -->
+    <section id="user-reports">
+        <h2>User-Reported Earthquakes</h2>
+        <div id="reports-container"></div>
+    </section>
 
-button:hover {
-    background: linear-gradient(135deg, #ff758c, #ff6f61);
-    transform: scale(1.05);
-}
+    <!-- 📜 Emergency Preparedness -->
+    <section id="emergency-preparedness">
+        <h2>Emergency Preparedness (DEPED Guidelines)</h2>
+        <ul>
+            <li>🔹 Follow the “Duck, Cover, and Hold” drill.</li>
+            <li>🔹 Stay away from glass, windows, and heavy objects.</li>
+            <li>🔹 After the shaking stops, evacuate in an orderly manner.</li>
+            <li>🔹 Follow your school's emergency evacuation plan.</li>
+            <li>🔹 Gather at the designated assembly area.</li>
+            <li>🔹 Wait for further instructions from school authorities.</li>
+        </ul>
+    </section>
 
-/* 🚨 Alerts */
-.alert-box {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: red;
-    color: white;
-    padding: 15px;
-    font-weight: bold;
-    border-radius: 5px;
-    z-index: 9999;
-}
+    <!-- 📍 User Location & Safety Tips -->
+    <section id="location-safety">
+        <h2>Your Location & Safety Tips</h2>
+        <button id="get-location-btn">Get My Location</button>
+        <p id="location-display">📍 Your location will appear here.</p>
+    </section>
 
-/* ✅ Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #333;
-    color: white;
-    width: 100%;
-}
+    <script src="script.js"></script>
+</body>
+</html>
