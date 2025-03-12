@@ -1,80 +1,59 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let loggedInUser = null;
-
-    // 🌍 Google Maps Initialization
-    function initMap() {
-        let map = new google.maps.Map(document.getElementById("earthquake-map"), {
-            center: { lat: 14.5995, lng: 120.9842 },
-            zoom: 6,
-        });
+    // 🌍 Redirect if not logged in
+    if (!localStorage.getItem("name") || !localStorage.getItem("lrn")) {
+        window.location.href = "login.html";
+    } else {
+        document.getElementById("user-name-display").textContent = `Logged in as: ${localStorage.getItem("name")}`;
     }
-    window.initMap = initMap;
 
-    // 🔒 User Login
-    document.getElementById("login-btn").addEventListener("click", function () {
-        let name = document.getElementById("user-name").value.trim();
-        let lrn = document.getElementById("lrn-number").value.trim();
+    // 🌍 Get User Location
+    document.getElementById("find-location").addEventListener("click", function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    let latitude = position.coords.latitude;
+                    let longitude = position.coords.longitude;
+                    document.getElementById("user-location").textContent = `📍 Latitude: ${latitude}, Longitude: ${longitude}`;
 
-        if (name === "" || lrn === "") {
-            alert("Please enter both name and LRN number.");
-            return;
+                    document.getElementById("earthquake-map").innerHTML = `<iframe width="100%" height="300" src="https://www.google.com/maps?q=${latitude},${longitude}&output=embed"></iframe>`;
+                },
+                function () {
+                    alert("Unable to retrieve your location.");
+                }
+            );
+        } else {
+            alert("Geolocation is not supported by this browser.");
         }
-
-        loggedInUser = { name, lrn };
-        document.getElementById("login-section").style.display = "none";
     });
 
-    // 🚨 Submit Earthquake Report
+    // 🚨 Report an Earthquake
     document.getElementById("submit-report").addEventListener("click", function () {
-        if (!loggedInUser) {
-            alert("Please log in before submitting a report.");
-            return;
-        }
-
         let experience = document.getElementById("quake-experience").value.trim();
         if (experience === "") {
             alert("Please enter your earthquake experience.");
             return;
         }
 
-        addUserReport(experience, loggedInUser.name);
-        document.getElementById("quake-experience").value = "";
-
-        playAlertSound();
-        showAlert("🚨 Earthquake alert triggered!", "red", 30000);
-    });
-
-    // 📋 Add User Report
-    function addUserReport(experience, userName) {
+        let name = localStorage.getItem("name");
         let reportsContainer = document.getElementById("user-reports");
         let reportItem = document.createElement("li");
-        reportItem.textContent = `📢 ${userName}: ${experience}`;
+        reportItem.textContent = `📢 ${name}: ${experience}`;
         reportsContainer.appendChild(reportItem);
-    }
 
-    // 🚨 Show Alert
-    function showAlert(message, color, duration) {
-        let alertBox = document.createElement("div");
-        alertBox.classList.add("alert-box");
-        alertBox.style.background = color;
-        alertBox.textContent = message;
-        document.body.appendChild(alertBox);
-
+        document.body.classList.add("flash-effect");
         setTimeout(() => {
-            alertBox.remove();
-        }, duration);
-    }
+            document.body.classList.remove("flash-effect");
+        }, 30000);
 
-    // 🔊 Play Alert Sound
-    function playAlertSound() {
         let audio = new Audio("assets/alert-sound.mp3");
         audio.play();
-    }
+    });
+});
 
-    // 📡 Fetch Earthquake Data
-    function fetchEarthquakeData() {
-        let earthquakeInfo = document.getElementById("earthquake-info");
-        earthquakeInfo.innerHTML = "<p>📊 Recent Earthquakes: <br> - M6.2 Near Manila<br> - M5.8 Cebu Region<br> - M4.9 Davao Area</p>";
-    }
-    fetchEarthquakeData();
+// 📝 Handle Login
+document.getElementById("login-form")?.addEventListener("submit", function (e) {
+    e.preventDefault();
+    localStorage.setItem("name", document.getElementById("name").value);
+    localStorage.setItem("lrn", document.getElementById("lrn").value);
+    window.location.href = "index.html";
 });
