@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 🌍 Get User Location (Fix Map Issue)
+    // 🌍 Get User Location & Fix Map
     document.getElementById("find-location").addEventListener("click", function () {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -10,9 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById("user-location").textContent =
                         `📍 Latitude: ${latitude}, Longitude: ${longitude}`;
 
-                    // ✅ Fix: Update Google Maps correctly
+                    // ✅ Fix: Properly load Google Maps iframe
                     let mapDiv = document.getElementById("earthquake-map");
-                    mapDiv.innerHTML = `<iframe width="100%" height="300" src="https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed"></iframe>`;
+                    mapDiv.innerHTML = `<iframe width="100%" height="350" src="https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed"></iframe>`;
                 },
                 function () {
                     alert("Unable to retrieve your location.");
