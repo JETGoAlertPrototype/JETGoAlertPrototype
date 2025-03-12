@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         `📍 Latitude: ${latitude}, Longitude: ${longitude}`;
 
                     // ✅ Fix: Properly load Google Maps iframe
-                    let mapDiv = document.getElementById("earthquake-map");
-                    mapDiv.innerHTML = `<iframe width="100%" height="350" src="https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed"></iframe>`;
+                    let mapIframe = document.getElementById("map-iframe");
+                    mapIframe.src = `https://www.google.com/maps?q=${latitude},${longitude}&z=15&output=embed`;
                 },
                 function () {
                     alert("Unable to retrieve your location.");
