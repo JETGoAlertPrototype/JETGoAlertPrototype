@@ -1,179 +1,203 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
 
-/* Root Variables */
-:root {
-    --primary-color: #007BFF; /* Trustworthy Blue */
-    --secondary-color: #FF3B30; /* Emergency Red */
-    --alert-color: #FFA500; /* Alert Orange */
-    --success-color: #28A745; /* Safe Green */
-    --background-color: #F4F6F9; /* Light Gray */
-    --dark-color: #1E1E2F; /* Deep Modern Dark */
-    --light-text: #EAEAEA;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-}
-
-/* Reset & Global Styles */
+/* Global Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
-/* Body */
 body {
-    background-color: var(--background-color);
-    color: var(--dark-color);
-    transition: all 0.3s ease;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
 }
 
 /* Navbar */
-nav {
-    background: var(--primary-color);
-    padding: 15px 30px;
+.navbar {
+    background: linear-gradient(135deg, #ff6b6b, #ffb347);
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0px 4px 10px var(--shadow-color);
     position: sticky;
     top: 0;
+    width: 100%;
     z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-nav .logo {
-    font-size: 1.5rem;
-    font-weight: 600;
+.navbar h1 {
     color: white;
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-nav ul {
+.navbar ul {
     list-style: none;
     display: flex;
-    gap: 20px;
 }
 
-nav ul li {
-    display: inline;
+.navbar ul li {
+    margin: 0 15px;
 }
 
-nav ul li a {
-    color: white;
+.navbar ul li a {
     text-decoration: none;
-    font-weight: 500;
-    padding: 8px 15px;
-    transition: 0.3s ease-in-out;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s ease;
 }
 
-nav ul li a:hover {
-    background-color: var(--alert-color);
-    border-radius: 5px;
+.navbar ul li a:hover {
+    color: #ffd166;
 }
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-    color: white;
-    padding: 100px 20px;
+    background: url('assets/hero-bg.jpg') center/cover no-repeat;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    border-radius: 10px;
-    margin: 20px;
-    box-shadow: 0px 5px 15px var(--shadow-color);
+    color: white;
+    padding: 20px;
 }
 
-.hero h1 {
-    font-size: 2.5rem;
-    font-weight: 600;
+.hero h2 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero p {
     font-size: 1.2rem;
-    opacity: 0.9;
-    margin-top: 10px;
+    max-width: 600px;
 }
 
-/* Buttons */
-.btn {
-    padding: 12px 20px;
-    font-size: 1rem;
-    font-weight: 500;
-    color: white;
-    background: var(--secondary-color);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
+/* Features Section */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 50px 20px;
+    text-align: center;
 }
 
-.btn:hover {
-    background: var(--alert-color);
-    box-shadow: 0px 4px 10px var(--shadow-color);
-}
-
-/* Cards */
-.card {
+.feature-box {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 4px 10px var(--shadow-color);
-    text-align: center;
-    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
 }
 
-.card:hover {
-    transform: scale(1.03);
-    box-shadow: 0px 5px 15px var(--shadow-color);
+.feature-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Alerts Section */
-.alert {
-    padding: 15px;
-    border-radius: 8px;
+.feature-box i {
+    font-size: 40px;
+    color: #ff6b6b;
+    margin-bottom: 15px;
+}
+
+.feature-box h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.feature-box p {
     font-size: 1rem;
-    text-align: center;
-    margin: 10px 0;
+    color: #666;
 }
 
-.alert.blue { background: var(--primary-color); color: white; }
-.alert.green { background: var(--success-color); color: white; }
-.alert.yellow { background: var(--alert-color); color: white; }
-.alert.orange { background: #FF8500; color: white; }
-.alert.red { background: var(--secondary-color); color: white; }
+/* Alert Section */
+.alert-section {
+    background: #ff6b6b;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.alert-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.alert-section button {
+    background: white;
+    color: #ff6b6b;
+    padding: 10px 20px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.alert-section button:hover {
+    background: #ffd166;
+    color: #333;
+}
+
+/* Map Section */
+.map-section {
+    background: #f0f0f0;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.map-container {
+    width: 100%;
+    height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Community Reporting */
+.community-report {
+    background: #1d3557;
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.community-report h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.community-report button {
+    background: #ffd166;
+    color: #1d3557;
+    padding: 10px 20px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.community-report button:hover {
+    background: #ff6b6b;
+    color: white;
+}
 
 /* Footer */
-footer {
-    background: var(--dark-color);
-    color: var(--light-text);
-    padding: 20px;
+.footer {
+    background: #333;
+    color: white;
     text-align: center;
+    padding: 20px;
     margin-top: 40px;
-    border-top: 5px solid var(--secondary-color);
-}
-
-footer p {
-    opacity: 0.8;
-    font-size: 0.9rem;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    nav ul {
-        margin-top: 10px;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
 }
