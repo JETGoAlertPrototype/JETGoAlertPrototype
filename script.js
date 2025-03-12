@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 🌍 Get User Location
+    // 🌍 Get User Location (Fix Map Issue)
     document.getElementById("find-location").addEventListener("click", function () {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -10,9 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById("user-location").textContent =
                         `📍 Latitude: ${latitude}, Longitude: ${longitude}`;
 
-                    // Update Google Maps
+                    // ✅ Fix: Update Google Maps correctly
                     let mapDiv = document.getElementById("earthquake-map");
-                    mapDiv.innerHTML = `<iframe width="100%" height="300" src="https://www.google.com/maps?q=${latitude},${longitude}&output=embed"></iframe>`;
+                    mapDiv.innerHTML = `<iframe width="100%" height="300" src="https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed"></iframe>`;
                 },
                 function () {
                     alert("Unable to retrieve your location.");
@@ -34,11 +34,11 @@ document.addEventListener("DOMContentLoaded", function () {
         // 🔊 Play alert sound
         playAlertSound();
 
-        // 💡 Flash screen effect
+        // 💡 Flash screen effect for 30 seconds
         document.body.classList.add("flash");
         setTimeout(() => {
             document.body.classList.remove("flash");
-        }, 2000);
+        }, 30000); // 30 seconds
 
         // 📋 Add to User Reports
         addUserReport(experience);
