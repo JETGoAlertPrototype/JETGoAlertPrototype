@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Script loaded!");
 
-    // Fix Earthquake Map Loading Issue
+    // Initialize the Earthquake Map
     let map;
     function initMap() {
         map = new google.maps.Map(document.getElementById("earthquake-map"), {
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
             zoom: 6,
         });
 
-        // Fetch earthquake data and plot on map
+        // Fetch earthquake data and plot markers
         fetchEarthquakeData();
     }
 
