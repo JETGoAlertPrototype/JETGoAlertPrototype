@@ -40,11 +40,11 @@ body {
     color: #ffadad;
 }
 
-/* 📌 Sections */
+/* 📌 Sections (Make boxes closer together) */
 section {
     background: white;
     padding: 20px;
-    margin: 50px auto; /* Reduced spacing between boxes */
+    margin: 40px auto;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     max-width: 700px;
@@ -79,21 +79,7 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* 🚨 Alerts */
-.alert-box {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: red;
-    color: white;
-    padding: 15px;
-    font-weight: bold;
-    border-radius: 5px;
-    z-index: 9999;
-}
-
-/* 🔊 Flashing screen effect */
+/* 🚨 Flashing Screen Effect (30 Seconds) */
 .flash {
     animation: flash-bg 0.5s infinite alternate;
 }
@@ -103,16 +89,11 @@ button:hover {
     to { background: white; }
 }
 
-/* 📋 User Reports */
-#user-reports {
-    list-style: none;
-    padding: 0;
-}
-
-#user-reports li {
-    background: #ffdbdb;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 8px;
-    text-align: left;
+/* ✅ Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #333;
+    color: white;
+    width: 100%;
 }
