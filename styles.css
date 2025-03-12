@@ -84,29 +84,6 @@ button:hover {
     font-weight: bold;
     border-radius: 5px;
     z-index: 9999;
-    animation: fadeInOut 4s ease-in-out; /* 🔧 Added fade-in/fade-out animation */
-}
-
-@keyframes fadeInOut {
-    0% { opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { opacity: 0; }
-}
-
-/* 📝 User Reports */
-.user-report {
-    background: #ffccda;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 10px;
-}
-
-/* 📍 Location Display */
-#location-display {
-    margin-top: 10px;
-    font-size: 1.1em;
-    color: #333;
 }
 
 /* ✅ Footer */
@@ -117,4 +94,3 @@ footer {
     color: white;
     width: 100%;
 }
-
