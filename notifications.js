@@ -4,3 +4,4 @@ function sendEmergencySMS() {
 }
 
 document.getElementById("sendSMSButton")?.addEventListener("click", sendEmergencySMS);
+
