@@ -29,7 +29,7 @@ body {
 #user-name-display {
     font-size: 1em;
     font-weight: bold;
-    position: fixed;
+    position: fixed-right;
 }
 
 /* 📌 Sections */
